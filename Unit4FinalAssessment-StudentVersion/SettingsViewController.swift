@@ -25,7 +25,7 @@ struct AnimationProperty {
     let stepperMin: Double //Lowest number stepper can be
     let stepperMax: Double //Highest number stepper can be
     let stepperIncrement: Double //number that stepper increments by
-    let startingStepperVal: Double //starting value of stepper
+    var startingStepperVal: Double //starting value of stepper
 }
 
 class SettingsViewController: UIViewController {
@@ -43,6 +43,15 @@ class SettingsViewController: UIViewController {
         [AnimationProperty(name: .horizontalPosition, stepperMin: -500, stepperMax: 500.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
         [AnimationProperty(name: .verticalPosition, stepperMin: -500, stepperMax: 500.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
         [AnimationProperty(name: .xAxisRotation, stepperMin: 0.0, stepperMax: 10000.0, stepperIncrement: 1.0, startingStepperVal: 1.0)]
+    ]
+    
+    var userProperties: [[AnimationProperty]] =
+        [
+            [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 20.0, stepperIncrement: 0.2, startingStepperVal: 0.0)],
+            [AnimationProperty(name: .hightMultiplier, stepperMin: 0, stepperMax: 20.0, stepperIncrement: 0.2, startingStepperVal: 0.0)],
+            [AnimationProperty(name: .horizontalPosition, stepperMin: -500, stepperMax: 500.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
+            [AnimationProperty(name: .verticalPosition, stepperMin: -500, stepperMax: 500.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
+            [AnimationProperty(name: .xAxisRotation, stepperMin: 0.0, stepperMax: 10000.0, stepperIncrement: 1.0, startingStepperVal: 1.0)]
     ]
     
     
@@ -80,14 +89,16 @@ extension SettingsViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let property = properties[indexPath.section][indexPath.row]
+        let property = userProperties[indexPath.section][indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! CustomTableViewCell
+        
+        cell.stepper.tag = indexPath.section
         
         cell.stepper.addTarget(self, action: #selector(stepperValueChanged(sender:)), for: .valueChanged)
         
         
-        cell.label.text = property.name.rawValue + " " +
+        cell.label.text = property.name.rawValue + ": " +
             String(property.startingStepperVal)
         
         cell.stepper.maximumValue = property.stepperMax
@@ -100,7 +111,33 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     @objc func stepperValueChanged(sender: UIStepper!){
-        print("working")
+        print("working?")
+        print("Sender Value: \(sender.value) for Sender Tag \(sender.tag)")
+        //The sender.tag is the corresponding section in userProperties
+        
+        // sender.tag 0 is width
+        // sender.tag 1 is height
+        // sender.tag 2 is horizontal
+        // sender.tag 3 is vertical
+        // sender.tag 4 is rotation
+        
+        switch sender.tag {
+        case 0:
+            userProperties[sender.tag][0].startingStepperVal = sender.value
+        case 1:
+            userProperties[sender.tag][0].startingStepperVal = sender.value
+        case 2:
+            userProperties[sender.tag][0].startingStepperVal = sender.value
+        case 3:
+            userProperties[sender.tag][0].startingStepperVal = sender.value
+        case 4:
+            userProperties[sender.tag][0].startingStepperVal = sender.value
+        default:
+            print("fail")
+        }
+        tableView.reloadData()
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
