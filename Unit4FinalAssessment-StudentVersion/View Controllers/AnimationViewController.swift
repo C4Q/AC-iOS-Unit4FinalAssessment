@@ -70,7 +70,11 @@ class AnimationViewController: UIViewController {
             snowmanImage.layer.removeAllAnimations()
         } else {
             counter += 1
-            animateRotationX()
+            if settingChosen == "Big Flip" {
+                animateRotationX()
+            } else if settingChosen == "Width" {
+                animateWidth()
+            }
             if counter % 2 == 0 {
                 pause(layer: snowmanImage.layer)
             } else {
@@ -92,7 +96,7 @@ class AnimationViewController: UIViewController {
         setUpPicker()
         self.picker.dataSource = self
         self.picker.delegate = self
-        settingArr = ["Default", "Big Flip"]
+        settingArr = ["Default", "Big Flip", "Width"]
     }
     
     
@@ -102,7 +106,10 @@ class AnimationViewController: UIViewController {
     
     
     func animateWidth() {
-        
+        let animation = CABasicAnimation(keyPath: "bounds")
+        animation.fromValue = snowmanImage.bounds
+        animation.toValue = 0.5
+        snowmanImage.layer.add(animation, forKey: nil)
     }
     func animateHeight() {
         
@@ -118,6 +125,7 @@ class AnimationViewController: UIViewController {
         snowmanImage.layer.add(animation, forKey: nil)
     }
     
+
     func animateRotationY() {
         let animation = CABasicAnimation(keyPath: "transform.rotation.y")
         let angleRadian = 2.0 * .pi
@@ -171,12 +179,14 @@ class AnimationViewController: UIViewController {
     
     func pause(layer: CALayer) {
         let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)
+        playPauseButton.setImage(#imageLiteral(resourceName: "playButton"), for: .normal)
         layer.speed = 0
         layer.timeOffset = pausedTime
     }
     
     func resume(layer: CALayer) {
         let pausedTime = layer.timeOffset
+        playPauseButton.setImage(#imageLiteral(resourceName: "pauseButton"), for: .normal)
         layer.speed = 1
         layer.timeOffset = 0
         layer.beginTime = 0
