@@ -68,6 +68,8 @@ extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return properties[section].count
     }
+    
+    
 }
 
 extension SettingsViewController: UITableViewDelegate {
