@@ -57,7 +57,6 @@ class AnimationViewController: UIViewController {
         buttonState = false
         animationView.playButton.addTarget(self, action: #selector(playAnimation), for: .touchUpInside)
         
-        
     }
     
     //add button function
@@ -82,12 +81,14 @@ class AnimationViewController: UIViewController {
                     //To change x and y position
                     self.animationView.snowmanImageView.transform = CGAffineTransform(translationX: self.xOffSet, y: self.yOffSet).scaledBy(x: CGFloat(self.widthMultiplier), y: CGFloat(self.heightMultiplier))
                     
-                    //To change height multiplier
-                    
-                    //To change width multiplier
-                    
                     //To set number of rotations on X Axis
                     
+                    
+                    
+                    /*
+                    //This rotates...
+                    self.animationView.snowmanImageView.transform = CGAffineTransform(rotationAngle: (180.0 * CGFloat(CGFloat.pi)) / 180.0)
+                */
                     
                     
                     
@@ -124,6 +125,7 @@ class AnimationViewController: UIViewController {
         let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
         layer.beginTime = timeSincePause
     }
+    
 }
 
 extension AnimationViewController: UIPickerViewDataSource {

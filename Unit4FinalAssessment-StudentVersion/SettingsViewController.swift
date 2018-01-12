@@ -18,8 +18,6 @@ enum PropertyName: String {
     case horizontalPosition = "Horizontal Position Offset"
     case verticalPosition = "Vertical Position Offset"
     case xAxisRotation = "X Axis Rotation Multiplier"
-    
-    
 }
 
 struct AnimationProperty {
@@ -36,9 +34,15 @@ class SettingsViewController: UIViewController {
     
     // TODO: The var properties is the name of the DEFAULT values for the animations. Therefore, saving a new set of animation values and giving it a name is the goal for this assessment.
     
+    
+    //This is a Matrix
     var properties: [[AnimationProperty]] =
     [
-        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)]
+        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 20.0, stepperIncrement: 0.2, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .hightMultiplier, stepperMin: 0, stepperMax: 20.0, stepperIncrement: 0.2, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .horizontalPosition, stepperMin: -500, stepperMax: 500.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .verticalPosition, stepperMin: -500, stepperMax: 500.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .xAxisRotation, stepperMin: 0.0, stepperMax: 10000.0, stepperIncrement: 1.0, startingStepperVal: 1.0)]
     ]
     
     
@@ -48,6 +52,7 @@ class SettingsViewController: UIViewController {
         view.addSubview(tableView)
         navigationItem.title = "Settings"
         layoutTableView()
+        
     }
     
     func layoutTableView() {
@@ -62,9 +67,11 @@ class SettingsViewController: UIViewController {
         let tv = UITableView()
         tv.dataSource = self
         tv.delegate = self
-        //TO DO: Register your subclass
+        tv.register(CustomTableViewCell.self, forCellReuseIdentifier: "SettingCell")
         return tv
     }()
+    
+    
 }
 
 extension SettingsViewController: UITableViewDataSource {
@@ -72,12 +79,30 @@ extension SettingsViewController: UITableViewDataSource {
         return properties.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //TO DO: Implement your Custom Cell that has a stepper
+        
         let property = properties[indexPath.section][indexPath.row]
-        let cell = UITableViewCell()
-        cell.textLabel?.text = property.name.rawValue
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! CustomTableViewCell
+        
+        cell.stepper.addTarget(self, action: #selector(stepperValueChanged(sender:)), for: .valueChanged)
+        
+        
+        cell.label.text = property.name.rawValue + " " +
+            String(property.startingStepperVal)
+        
+        cell.stepper.maximumValue = property.stepperMax
+        cell.stepper.minimumValue = property.stepperMin
+        cell.stepper.stepValue = property.stepperIncrement
+        cell.stepper.value = property.startingStepperVal
+        
         return cell
+        
     }
+    
+    @objc func stepperValueChanged(sender: UIStepper!){
+        print("working")
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return properties[section].count
     }
@@ -87,16 +112,26 @@ extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Size Settings"
+            return "Width Settings"
+        case 1:
+            return "Height Settings"
+        case 2:
+            return "Horizontal Settings"
+        case 3:
+            return "Vertical Settings"
+        case 4:
+            return "Rotation Settings"
         //TO DO: Handle other sections
         default:
             return "Other Settings"
         }
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
 }
+
 
 
 
