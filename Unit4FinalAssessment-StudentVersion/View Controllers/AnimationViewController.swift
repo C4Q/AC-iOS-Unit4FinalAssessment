@@ -24,9 +24,9 @@ enum SettingsKeys: String {
 class AnimationViewController: UIViewController {
     
     var pauseOrPlay = "pause"
-    var settingChosen = ""
+    var settingChosen = "Default"
     var settingArr = [String]()
-    
+    var counter = 0
     let animatedSettings = [SettingsKeys.Width.rawValue,
                             SettingsKeys.Height.rawValue,
                             SettingsKeys.RotationX.rawValue,
@@ -60,12 +60,24 @@ class AnimationViewController: UIViewController {
     
     @objc func buttonAction(sender: UIButton) {
         print("Button pushed")
+      
+        print(counter % 2)
+        print(settingChosen)
+        
         
         if settingChosen == "Default" {
-            pause(layer: snowmanImage.layer)
-        } else if settingChosen == "Big Flip" {
-        animateRotationX()
+            counter = 0
+            snowmanImage.layer.removeAllAnimations()
+        } else {
+            counter += 1
+            animateRotationX()
+            if counter % 2 == 0 {
+                pause(layer: snowmanImage.layer)
+            } else {
+                resume(layer: snowmanImage.layer)
+            }
         }
+        
         
     }
     

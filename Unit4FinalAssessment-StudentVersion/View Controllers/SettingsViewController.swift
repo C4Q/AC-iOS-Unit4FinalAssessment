@@ -70,8 +70,7 @@ extension SettingsViewController: UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-            //properties[section].count
+        return properties[section].count
     }
 }
 
