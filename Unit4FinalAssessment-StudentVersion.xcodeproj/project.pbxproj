@@ -14,6 +14,7 @@
 		54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10372007F270005FFA29 /* SettingsViewController.swift */; };
 		DBA39EF1200924C400513978 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA39EF0200924C400513978 /* FileManager.swift */; };
 		DBA39EF3200924D500513978 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA39EF2200924D500513978 /* UserDefaults.swift */; };
+		DBA39EF520093DFD00513978 /* AnimationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA39EF420093DFD00513978 /* AnimationsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		54AE10372007F270005FFA29 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		DBA39EF0200924C400513978 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		DBA39EF2200924D500513978 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		DBA39EF420093DFD00513978 /* AnimationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			children = (
 				54AE10232007F203005FFA29 /* AppDelegate.swift */,
 				54AE10352007F256005FFA29 /* AnimationViewController.swift */,
+				DBA39EF420093DFD00513978 /* AnimationsView.swift */,
 				54AE10372007F270005FFA29 /* SettingsViewController.swift */,
 				DBA39EF0200924C400513978 /* FileManager.swift */,
 				DBA39EF2200924D500513978 /* UserDefaults.swift */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
+				DBA39EF520093DFD00513978 /* AnimationsView.swift in Sources */,
 				DBA39EF3200924D500513978 /* UserDefaults.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,
 				54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */,
