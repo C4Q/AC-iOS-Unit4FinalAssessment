@@ -35,9 +35,11 @@ class SettingsViewController: UIViewController {
         view.addSubview(tableView)
         navigationItem.title = "Settings"
         layoutTableView()
+        
     }
     
     func layoutTableView() {
+        tableView.backgroundColor = .orange
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -50,6 +52,7 @@ class SettingsViewController: UIViewController {
         tv.dataSource = self
         tv.delegate = self
         //TO DO: Register your subclass
+        tv.register(SettingsCell.self, forCellReuseIdentifier: "ForecastCell")
         return tv
     }()
 }
@@ -62,6 +65,7 @@ extension SettingsViewController: UITableViewDataSource {
         //TO DO: Implement your Custom Cell that has a stepper
         let property = properties[indexPath.section][indexPath.row]
         let cell = UITableViewCell()
+//            tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! SettingsCell
         cell.textLabel?.text = property.name.rawValue
         return cell
     }
@@ -83,6 +87,8 @@ extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    
 }
 
 
