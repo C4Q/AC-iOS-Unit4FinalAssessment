@@ -31,8 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let svc = SettingsViewController()
         // put this tab's view controller in a navigation controller
         let navCon = UINavigationController(rootViewController: svc)
+        
         // customize the tab bar item
-        svc.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 1)
+        navCon.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 1)
         
         tbc.viewControllers = [avc, navCon]
         

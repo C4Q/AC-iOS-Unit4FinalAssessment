@@ -60,6 +60,7 @@
 			children = (
 				810F251B20090CAC00FB833C /* Supporting Files */,
 				810F251C20090CB800FB833C /* View Controllers */,
+				810F25222009386100FB833C /* Views */,
 				810F251F2009119200FB833C /* Custom Cell */,
 				54AE102F2007F203005FFA29 /* Info.plist */,
 			);
@@ -80,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				54AE10352007F256005FFA29 /* AnimationViewController.swift */,
-				810F25202009207E00FB833C /* AnimationView.swift */,
 				54AE10372007F270005FFA29 /* SettingsViewController.swift */,
 			);
 			path = "View Controllers";
@@ -92,6 +92,14 @@
 				810F251D2009118D00FB833C /* SettingTableViewCell.swift */,
 			);
 			path = "Custom Cell";
+			sourceTree = "<group>";
+		};
+		810F25222009386100FB833C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				810F25202009207E00FB833C /* AnimationView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
