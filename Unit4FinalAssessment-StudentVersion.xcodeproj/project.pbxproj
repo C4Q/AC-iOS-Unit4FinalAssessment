@@ -12,6 +12,7 @@
 		54AE102E2007F203005FFA29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54AE102C2007F203005FFA29 /* LaunchScreen.storyboard */; };
 		54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10352007F256005FFA29 /* AnimationViewController.swift */; };
 		54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10372007F270005FFA29 /* SettingsViewController.swift */; };
+		939973CA2009252400F5752F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939973C92009252400F5752F /* SettingsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		54AE102F2007F203005FFA29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54AE10352007F256005FFA29 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		54AE10372007F270005FFA29 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		939973C92009252400F5752F /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +57,38 @@
 			isa = PBXGroup;
 			children = (
 				54AE10232007F203005FFA29 /* AppDelegate.swift */,
-				54AE10352007F256005FFA29 /* AnimationViewController.swift */,
-				54AE10372007F270005FFA29 /* SettingsViewController.swift */,
-				54AE102A2007F203005FFA29 /* Assets.xcassets */,
-				54AE102C2007F203005FFA29 /* LaunchScreen.storyboard */,
+				939973CB2009252A00F5752F /* View Controllers */,
+				939973CC2009253A00F5752F /* Cells */,
+				939973CD2009254700F5752F /* Supporting Files */,
 				54AE102F2007F203005FFA29 /* Info.plist */,
 			);
 			path = "Unit4FinalAssessment-StudentVersion";
+			sourceTree = "<group>";
+		};
+		939973CB2009252A00F5752F /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				54AE10352007F256005FFA29 /* AnimationViewController.swift */,
+				54AE10372007F270005FFA29 /* SettingsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		939973CC2009253A00F5752F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				939973C92009252400F5752F /* SettingsCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		939973CD2009254700F5752F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				54AE102A2007F203005FFA29 /* Assets.xcassets */,
+				54AE102C2007F203005FFA29 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +164,7 @@
 			files = (
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,
+				939973CA2009252400F5752F /* SettingsCell.swift in Sources */,
 				54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

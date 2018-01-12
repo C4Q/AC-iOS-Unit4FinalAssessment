@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController {
         view.addSubview(tableView)
         navigationItem.title = "Settings"
         layoutTableView()
+        
     }
     
     func layoutTableView() {
@@ -51,6 +52,7 @@ class SettingsViewController: UIViewController {
         tv.dataSource = self
         tv.delegate = self
         //TO DO: Register your subclass
+        tv.register(SettingsCell.self, forCellReuseIdentifier: "ForecastCell")
         return tv
     }()
 }
@@ -63,11 +65,13 @@ extension SettingsViewController: UITableViewDataSource {
         //TO DO: Implement your Custom Cell that has a stepper
         let property = properties[indexPath.section][indexPath.row]
         let cell = UITableViewCell()
+//            tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! SettingsCell
         cell.textLabel?.text = property.name.rawValue
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return properties[section].count
+        return 2
+            //properties[section].count
     }
 }
 
@@ -84,6 +88,8 @@ extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    
 }
 
 

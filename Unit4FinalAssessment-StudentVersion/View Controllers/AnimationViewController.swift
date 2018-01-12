@@ -11,6 +11,7 @@ import UIKit
 class AnimationViewController: UIViewController {
     
     var pauseOrPlay = "pause"
+    var settingArr = [String]()
     
     //Snowman Image View
     lazy var snowmanImage: UIImageView = {
@@ -28,10 +29,10 @@ class AnimationViewController: UIViewController {
     //Play Pause Button
     lazy var playPauseButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .blue
         button.titleLabel?.text = "play"
-        button.layer.cornerRadius = button.bounds.width / 2.0
-        button.layer.masksToBounds = true
+        button.setImage(#imageLiteral(resourceName: "playButton"), for: .normal)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.clipsToBounds = true
         return button
     }()
     
@@ -66,14 +67,14 @@ class AnimationViewController: UIViewController {
         picker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         picker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         picker.bottomAnchor.constraint(equalTo: playPauseButton.topAnchor).isActive = true
+        picker.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3).isActive = true
     }
     
     func setUpButton() {
         playPauseButton.translatesAutoresizingMaskIntoConstraints = false
         playPauseButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -175).isActive = true
-            playPauseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 175).isActive = true
+        playPauseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 175).isActive = true
         playPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
-        playPauseButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1)
     }
     
 }
@@ -95,8 +96,8 @@ extension AnimationViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
    
         
-        
         return 2
+            //settingArr.count
     }
     
     
