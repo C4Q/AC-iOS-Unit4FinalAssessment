@@ -12,12 +12,19 @@ class AnimationViewController: UIViewController {
     
     let animationView = AnimationView()
     
+    var settings = [[AnimationProperty]]() {
+        didSet {
+            animationView.savedSettingsPicker.reloadAllComponents()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.6, green: 0.6, blue: 0.9, alpha: 1.0)
         view.addSubview(animationView)
         animationView.savedSettingsPicker.dataSource = self
         animationView.savedSettingsPicker.delegate = self
+        FileManagerHelper.manager.loadAllAnimations()
     }
 }
 
@@ -28,7 +35,11 @@ extension AnimationViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
+        return settings.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

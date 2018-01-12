@@ -52,6 +52,10 @@ class FileManagerHelper {
         
     }
     
+  func loadAllAnimations() {
+        
+    }
+    
     
     private func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
