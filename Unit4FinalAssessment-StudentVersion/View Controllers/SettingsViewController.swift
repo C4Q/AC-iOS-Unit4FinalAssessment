@@ -29,11 +29,11 @@ class SettingsViewController: UIViewController {
     
     var properties: [[AnimationProperty]] =
     [
-        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
-        [AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .widthMultiplier, stepperMin: 0.0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .heightMultiplier, stepperMin: 0.0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
         [AnimationProperty(name: .horizontalOffset, stepperMin: -100.0, stepperMax: 100.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
         [AnimationProperty(name: .verticalOffset, stepperMin: -100.0, stepperMax: 100.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
-        [AnimationProperty(name: .numberOfFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0)]
+        [AnimationProperty(name: .numberOfFlips, stepperMin: 0.0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0)]
         
     ]
 
@@ -75,10 +75,11 @@ extension SettingsViewController: UITableViewDataSource {
         let property = properties[indexPath.section][indexPath.row]
         let cell = SettingTableViewCell()
         cell.settingNameLabel.text = property.name.rawValue
-        cell.stepperValueLabel.text = "\(cell.settingStepper.value)"
-        cell.settingStepper.minimumValue = property.stepperMin
-        cell.settingStepper.maximumValue = property.stepperMax
-        cell.settingStepper.stepValue = property.stepperIncrement
+//        cell.stepperValueLabel.text = "\(cell.settingStepper.value)"
+//        cell.settingStepper.minimumValue = property.stepperMin
+//        cell.settingStepper.maximumValue = property.stepperMax
+//        cell.settingStepper.stepValue = property.stepperIncrement
+        cell.configureCell(property: property)
 
         return cell
     }

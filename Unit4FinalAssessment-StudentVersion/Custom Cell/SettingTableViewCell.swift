@@ -43,10 +43,7 @@ class SettingTableViewCell: UITableViewCell {
     lazy var settingStepper: UIStepper = {
        let stepper = UIStepper()
         
-        stepper.minimumValue = 0.0
-        stepper.maximumValue = 1.0
-        stepper.stepValue = 0.1
-        stepper.value = 0.0
+
     
         return stepper
     }()
@@ -59,10 +56,17 @@ class SettingTableViewCell: UITableViewCell {
         return label
     }()
     
-    
+    /// Credit: http://www.danieledonzelli.com/ios/uistepper-tutorial/
     @objc func progStepperSetValue(sender: UIStepper!) {
-        let stepperValue = Int(sender.value)
+        let stepperValue = Double(sender.value)
         stepperValueLabel.text = String(stepperValue)
+    }
+    
+    func configureCell(property: AnimationProperty) {
+        settingStepper.minimumValue = property.stepperMin
+        settingStepper.maximumValue = property.stepperMax
+        settingStepper.stepValue = property.stepperIncrement
+        
     }
     
     
@@ -84,7 +88,7 @@ class SettingTableViewCell: UITableViewCell {
         addSubview(stepperValueLabel)
         stepperValueLabel.translatesAutoresizingMaskIntoConstraints = false
         stepperValueLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 0).isActive = true
-        stepperValueLabel.leadingAnchor.constraint(equalTo: settingNameLabel.trailingAnchor, constant: 20).isActive = true
+        stepperValueLabel.trailingAnchor.constraint(equalTo: settingStepper.leadingAnchor, constant: -50).isActive = true
         
         
     }
