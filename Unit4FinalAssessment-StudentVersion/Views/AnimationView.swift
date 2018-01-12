@@ -14,7 +14,6 @@ class AnimationView: UIView {
     lazy var animationImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .blue
         imageView.image = #imageLiteral(resourceName: "snowman")
         return imageView
     }()
@@ -39,10 +38,8 @@ class AnimationView: UIView {
     // Play/Pause button
     lazy var controlButton: UIButton = {
        let button = UIButton()
-        button.backgroundColor = .red
         button.setImage(#imageLiteral(resourceName: "circled_play"), for: .normal)
         button.setImage(#imageLiteral(resourceName: "cancel"), for: .selected)
-        
         return button
     }()
     
@@ -66,7 +63,6 @@ class AnimationView: UIView {
     
     lazy var pickerView: UIPickerView = {
        let pickerView = UIPickerView()
-        pickerView.backgroundColor = .purple
         return pickerView
     }()
     

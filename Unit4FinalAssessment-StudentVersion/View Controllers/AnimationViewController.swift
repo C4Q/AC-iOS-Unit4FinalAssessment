@@ -14,7 +14,6 @@ class AnimationViewController: UIViewController {
     var animations = [DataPersistenceHelper.UserAnimation]() {
         didSet {
             animationView.pickerView.reloadAllComponents()
-            animationView.pickerView.selectRow(0, inComponent: 0, animated: false)
         }
     }
     
@@ -28,6 +27,7 @@ class AnimationViewController: UIViewController {
         
         animationView.pickerView.dataSource = self
         animationView.pickerView.delegate = self
+        
         
         animationView.controlButton.addTarget(self, action: #selector(controlButtonTapped), for: .touchUpInside)
         
@@ -44,15 +44,46 @@ class AnimationViewController: UIViewController {
     }
     
     @objc func controlButtonTapped() {
+        if !animationView.controlButton.isSelected {
+        animationView.controlButton.isSelected = true
+        pauseLayer(layer: animationView.animationImageView.layer)
+            
+        } else {
+            animationView.controlButton.isSelected = false
+            resumeLayer(layer: animationView.animationImageView.layer)
+        }
         
-        guard let loadedAnimation = loadedAnimation else { return }
         
-        Animation.doAnimation(animation: loadedAnimation.animation, on: animationView.animationImageView)
         
+
     }
     
     
+    func runAnimation() {
+        guard let loadedAnimation = loadedAnimation else { return }
+        
+        Animation.doAnimation(animation: loadedAnimation.animation, on: animationView.animationImageView)
+    }
     
+    /*
+     How to pause and resume uiview animate
+     https://stackoverflow.com/questions/33994520/how-to-pause-and-resume-uiview-animatewithduration
+    */
+    
+    func pauseLayer(layer: CALayer) {
+        let pausedTime: CFTimeInterval = layer.convertTime(CACurrentMediaTime(), from: nil)
+        layer.speed = 0.0
+        layer.timeOffset = pausedTime
+    }
+    
+    func resumeLayer(layer: CALayer) {
+        let pausedTime: CFTimeInterval = layer.timeOffset
+        layer.speed = 1.0
+        layer.timeOffset = 0.0
+        layer.beginTime = 0.0
+        let timeSincePause: CFTimeInterval = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        layer.beginTime = timeSincePause
+    }
     
     
     
@@ -78,6 +109,7 @@ extension AnimationViewController: UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         loadedAnimation = animations[row]
+        runAnimation()
     }
 
 }

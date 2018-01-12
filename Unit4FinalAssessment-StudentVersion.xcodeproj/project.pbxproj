@@ -14,7 +14,6 @@
 		54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10372007F270005FFA29 /* SettingsViewController.swift */; };
 		81A0BABF20090A9C006414EE /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0BABE20090A9C006414EE /* AnimationView.swift */; };
 		81A0BAC120090AAB006414EE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0BAC020090AAB006414EE /* SettingsView.swift */; };
-		81A0BAC32009131D006414EE /* AnimatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0BAC22009131C006414EE /* AnimatorBrain.swift */; };
 		81A0BAC82009188E006414EE /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0BAC72009188E006414EE /* SettingsTableViewCell.swift */; };
 		81A0BACA20093014006414EE /* DataPersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0BAC920093014006414EE /* DataPersistenceHelper.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +28,6 @@
 		54AE10372007F270005FFA29 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		81A0BABE20090A9C006414EE /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		81A0BAC020090AAB006414EE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		81A0BAC22009131C006414EE /* AnimatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorBrain.swift; sourceTree = "<group>"; };
 		81A0BAC72009188E006414EE /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		81A0BAC920093014006414EE /* DataPersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,7 +95,6 @@
 		81A0BAC62009134D006414EE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				81A0BAC22009131C006414EE /* AnimatorBrain.swift */,
 				81A0BAC920093014006414EE /* DataPersistenceHelper.swift */,
 			);
 			path = Models;
@@ -175,7 +172,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				81A0BAC120090AAB006414EE /* SettingsView.swift in Sources */,
-				81A0BAC32009131D006414EE /* AnimatorBrain.swift in Sources */,
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
 				81A0BABF20090A9C006414EE /* AnimationView.swift in Sources */,
 				81A0BAC82009188E006414EE /* SettingsTableViewCell.swift in Sources */,

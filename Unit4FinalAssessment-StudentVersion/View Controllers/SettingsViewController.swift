@@ -42,6 +42,8 @@ struct Animation: Codable {
     
     static func doAnimation(animation: Animation, on image: UIImageView) {
         
+        image.layer.masksToBounds = true
+        
         UIView.animate(withDuration: animation.duration) {
             
             image.transform = CGAffineTransform(scaleX: CGFloat(animation.widthMultiplier), y: CGFloat(animation.heightMultiplier)).translatedBy(x: CGFloat(animation.horizontalOffset), y: CGFloat(animation.verticalOffset))
@@ -75,15 +77,15 @@ class SettingsViewController: UIViewController {
             ],
             
             // Offset
-            [AnimationProperty(name: .horizontalOffset, stepperMin: -100, stepperMax: 100.0, stepperIncrement: 5, startingStepperVal: 0.0, referenceValue: 2),
-             AnimationProperty(name: .verticalOffset, stepperMin: -100, stepperMax: 100.0, stepperIncrement: 5, startingStepperVal: 0.0, referenceValue: 3)
+            [AnimationProperty(name: .horizontalOffset, stepperMin: -300, stepperMax: 300.0, stepperIncrement: 5, startingStepperVal: 0.0, referenceValue: 2),
+             AnimationProperty(name: .verticalOffset, stepperMin: -300, stepperMax: 300.0, stepperIncrement: 5, startingStepperVal: 0.0, referenceValue: 3)
             ],
             
             // Other
             [AnimationProperty(name: .duration, stepperMin: 0.0, stepperMax: 10.0, stepperIncrement: 0.5, startingStepperVal: 1.0, referenceValue: 4),
-            AnimationProperty(name: .numberOfFlips, stepperMin: 0, stepperMax: 2.0, stepperIncrement: 1, startingStepperVal: 0.0, referenceValue: 5),
+            AnimationProperty(name: .numberOfFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1, startingStepperVal: 0.0, referenceValue: 5),
              AnimationProperty(name: .opacity, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 1.0, referenceValue: 6),
-             AnimationProperty(name: .curvature, stepperMin: 0, stepperMax: 4.0, stepperIncrement: 1, startingStepperVal: 0.0, referenceValue: 7)
+             AnimationProperty(name: .curvature, stepperMin: 0, stepperMax: 20.0, stepperIncrement: 1, startingStepperVal: 0.0, referenceValue: 7)
             ]
     ]
     
