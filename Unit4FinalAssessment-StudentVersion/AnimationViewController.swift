@@ -21,12 +21,28 @@ class AnimationViewController: UIViewController {
     let sampleArr = ["Thing1", "Thing2"]
     
     let animationView = AnimationsView()
+    var currentPickerViewRow: Int = 0
     
     //To track button state and image state
-    var startingPosition: CGRect = .zero
+    var startingPosition: CGRect = .zero {
+        didSet {
+            self.widthValue = startingPosition.width
+            self.xOffSet = startingPosition.minX
+            self.yOffSet = startingPosition.minY
+            self.heightValue = startingPosition.height
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         startingPosition = animationView.snowmanImageView.frame
     }
+    
+    //To track animation values to change
+    var widthValue: CGFloat = 0
+    var heightValue: CGFloat  = 0
+    var xOffSet: CGFloat = 0
+    var yOffSet: CGFloat = 0
+    var numberOfRotations: Int = 1 // TODO: Set to 0 for data testing
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +67,32 @@ class AnimationViewController: UIViewController {
                 //start animation since image has not moved and you hit play
                 buttonState = true
                 animationView.playButton.setImage(UIImage(named:"pause"), for: .normal)
+                
                 UIView.animate(withDuration: 2.0, delay: 0, options: [.repeat,.autoreverse], animations: {
                     
+                    //Eventually, there will need to be a switch of some kind that dynamically changes this block of code based on the pickerview selected row.
+                    var selectedAnimationsToRun = self.sampleArr[self.currentPickerViewRow] //In theory, this should populate and then replace the number values in the animations
+                    
+//                    var widthValue = 0
+//                    var heightValue = 0
+//                    var xOffSet = 0
+//                    var yOffSet = 0
+//                    var numberOfRotations = 1
+                    
                     self.animationView.snowmanImageView.layer.opacity = 0.0
-                    self.animationView.snowmanImageView.transform = CGAffineTransform(translationX: self.view.bounds.maxX * 0.66, y: self.view.bounds.maxY).scaledBy(x: 0.001, y: 0.001)
+                    
+                    //To change x and y position
+                    self.animationView.snowmanImageView.transform = CGAffineTransform(translationX: self.xOffSet, y: self.yOffSet)
+                    
+                    //To change height
+                    
+                    //To change width
+                    
+                    //To set number of rotations on X Axis
+                    
+                    
+                    
+                    
                     
                 })
                 
