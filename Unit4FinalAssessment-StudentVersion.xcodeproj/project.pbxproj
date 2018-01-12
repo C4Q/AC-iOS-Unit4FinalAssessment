@@ -12,6 +12,10 @@
 		54AE102E2007F203005FFA29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54AE102C2007F203005FFA29 /* LaunchScreen.storyboard */; };
 		54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10352007F256005FFA29 /* AnimationViewController.swift */; };
 		54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10372007F270005FFA29 /* SettingsViewController.swift */; };
+		81E796BD20090F3C003A1656 /* AnimationSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E796BC20090F3C003A1656 /* AnimationSettingsTableViewCell.swift */; };
+		81E796C120090F84003A1656 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E796C020090F84003A1656 /* AnimationView.swift */; };
+		81E796C320091803003A1656 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E796C220091803003A1656 /* SettingsView.swift */; };
+		81E796C520095560003A1656 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E796C420095560003A1656 /* TextFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		54AE102F2007F203005FFA29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54AE10352007F256005FFA29 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		54AE10372007F270005FFA29 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		81E796BC20090F3C003A1656 /* AnimationSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		81E796C020090F84003A1656 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		81E796C220091803003A1656 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		81E796C420095560003A1656 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +63,33 @@
 			isa = PBXGroup;
 			children = (
 				54AE10232007F203005FFA29 /* AppDelegate.swift */,
-				54AE10352007F256005FFA29 /* AnimationViewController.swift */,
-				54AE10372007F270005FFA29 /* SettingsViewController.swift */,
+				81E796BE20090F45003A1656 /* View Controllers */,
+				81E796BF20090F4F003A1656 /* Views */,
 				54AE102A2007F203005FFA29 /* Assets.xcassets */,
 				54AE102C2007F203005FFA29 /* LaunchScreen.storyboard */,
 				54AE102F2007F203005FFA29 /* Info.plist */,
 			);
 			path = "Unit4FinalAssessment-StudentVersion";
+			sourceTree = "<group>";
+		};
+		81E796BE20090F45003A1656 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				54AE10352007F256005FFA29 /* AnimationViewController.swift */,
+				54AE10372007F270005FFA29 /* SettingsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		81E796BF20090F4F003A1656 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				81E796C020090F84003A1656 /* AnimationView.swift */,
+				81E796C220091803003A1656 /* SettingsView.swift */,
+				81E796C420095560003A1656 /* TextFieldView.swift */,
+				81E796BC20090F3C003A1656 /* AnimationSettingsTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +164,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
+				81E796C520095560003A1656 /* TextFieldView.swift in Sources */,
+				81E796C120090F84003A1656 /* AnimationView.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,
+				81E796C320091803003A1656 /* SettingsView.swift in Sources */,
 				54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */,
+				81E796BD20090F3C003A1656 /* AnimationSettingsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
