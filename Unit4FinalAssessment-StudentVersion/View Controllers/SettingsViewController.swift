@@ -8,15 +8,15 @@
 
 import UIKit
 
-enum PropertyName: String {
+enum PropertyName: String, Codable {
     case widthMultiplier = "Width Multiplier"
     case heightMultiplier = "Height Multiplier"
     case horizontalOffset = "Horizontal Offset"
     case verticalOffset = "Vertical Offset"
     case numberOfXFlips = "Number of X Flips"
-    // extra credit
     case numberOfYFlips = "Number of Y Flips"
     case numberOfZFlips = "Number of Z Flips"
+    case borderSize = "Border Size"
 }
 
 struct AnimationProperty {
@@ -31,9 +31,9 @@ class SettingsViewController: UIViewController {
 
     var properties: [[AnimationProperty]] =
     [
-        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0), AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
-        [AnimationProperty(name: .horizontalOffset, stepperMin: -100.0, stepperMax: 100.0, stepperIncrement: 1.0, startingStepperVal: 0.0), AnimationProperty(name: .verticalOffset, stepperMin: -100.0, stepperMax: 100.0, stepperIncrement: 1.0, startingStepperVal: 0.0)],
-        [AnimationProperty(name: .numberOfXFlips, stepperMin: 0, stepperMax: 5.0, stepperIncrement: 1.0, startingStepperVal: 0.0)]
+        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 2.0, stepperIncrement: 0.1, startingStepperVal: 0.0), AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax: 2.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .horizontalOffset, stepperMin: -300.0, stepperMax: 300.0, stepperIncrement: 10.0, startingStepperVal: 0.0), AnimationProperty(name: .verticalOffset, stepperMin: -300.0, stepperMax: 300.0, stepperIncrement: 10.0, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .numberOfXFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0), AnimationProperty(name: .numberOfYFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0), AnimationProperty(name: .numberOfZFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0)], [AnimationProperty(name: .borderSize, stepperMin: 0, stepperMax: 20.0, stepperIncrement: 1.0, startingStepperVal: 0.0)]
     ]
 
     override func viewDidLoad() {
@@ -52,23 +52,50 @@ class SettingsViewController: UIViewController {
     // https://stackoverflow.com/questions/37696485/show-the-textfield-in-the-alertcontroller-in-swift
     // reference for Alertview with input
     @objc private func addAnimationPressed() {
-        let alertController = UIAlertController(title: "Add Setting", message: "Enter a name for your setting", preferredStyle: UIAlertControllerStyle.alert)
+        showInputAlertController(with: "Add setting", message: "Enter a name for your setting", placeholder: "Enter name")
+    }
+    
+    private func showInputAlertController(with title: String, message: String, placeholder: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alertController.addTextField { (textField : UITextField) -> Void in
-            textField.placeholder = "name here"
+            textField.placeholder = placeholder
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (result : UIAlertAction) -> Void in
             return
         }
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             guard let textFields = alertController.textFields, let textInTexfield = textFields[0].text else { return }
-            let animationToSave = SavedAnimation(animationName: textInTexfield)
+            
+            var animations = [UserAnimation]()
+            let cells = self.tableView.visibleCells as! Array<SettingsTableViewCell>
+            dump(cells.count)
+            for cell in cells {
+                guard let cellIndexpath = self.tableView.indexPath(for: cell) else { return }
+                let section = cellIndexpath.section
+                let row = cellIndexpath.row
+                let animationName = self.properties[section][row].name
+                let animationValue = cell.animationStepper.value
+                let userAnimation = UserAnimation(propertyName: animationName, value: animationValue)
+                animations.append(userAnimation)
+            }
+            
+            let animationToSave = SavedAnimation(animationName: textInTexfield, userAnimations: animations)
+            
             if FileManagerHelper.shared.isAnimationNameAlreadySaved(animation: animationToSave) {
-                // show alert view that animation is already saved
+                self.showAlertController(with: "Error", message: "Animation name already saved")
                 return
             }
+            
             FileManagerHelper.shared.saveAnimation(with: animationToSave)
         }
         alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showAlertController(with title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
     }
@@ -121,23 +148,14 @@ extension SettingsViewController: UITableViewDelegate {
             return "Position Settings"
         case 2:
             return "Flip Settings"
+        case 3:
+            return "Border Setting"
         default:
             return "Other Settings"
         }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 50
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-

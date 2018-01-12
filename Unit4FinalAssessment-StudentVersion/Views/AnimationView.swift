@@ -10,6 +10,8 @@ import UIKit
 
 class AnimationView: UIView {
     
+    var playingAnimation: Bool = false
+    
     // snowman image view
     lazy var snowmanImageView: UIImageView = {
         let imageView = UIImageView()
@@ -50,9 +52,150 @@ class AnimationView: UIView {
     // animation button
     lazy var animationbutton: UIButton = {
         let button = UIButton()
+        button.addTarget(self, action: #selector(animationButtonPressed), for: .touchUpInside)
         button.setImage(#imageLiteral(resourceName: "play"), for: .normal)
         return button
     }()
+    
+    @objc private func animationButtonPressed() {
+        if playingAnimation {
+            playingAnimation = false
+            pause(layer: snowmanImageView.layer)
+            animationbutton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+        } else {
+            playingAnimation = true
+            resume(layer: snowmanImageView.layer)
+            animationbutton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+            let selectedValue = savedSettingsPickerView.selectedRow(inComponent: 0)
+            let animationsArray = FileManagerHelper.shared.getSavedAnimations()[selectedValue].userAnimations
+            for userAnimation in animationsArray {
+                switch userAnimation.propertyName {
+                case .widthMultiplier:
+                    widthAnimation(value: userAnimation.value)
+                case .heightMultiplier:
+                    heightAnimation(value: userAnimation.value)
+                case .horizontalOffset:
+                    horizontalOffsetAnimation(value: userAnimation.value)
+                case .verticalOffset:
+                    verticalOffsetAnimation(value: userAnimation.value)
+                case .numberOfXFlips:
+                    xFlipsAnimation(value: userAnimation.value)
+                case .numberOfYFlips:
+                    yFlipsAnimation(value: userAnimation.value)
+                case .numberOfZFlips:
+                    zFlipsAnimation(value: userAnimation.value)
+                case .borderSize:
+                    borderSizeAnimation(value: userAnimation.value)
+                }
+            }
+        }
+    }
+    
+    func widthAnimation(value: Double) {
+        if value == 0.0 { return }
+        let animation = CABasicAnimation(keyPath: "transform.scale.x")
+        let toValue = CATransform3DMakeScale(CGFloat(value), 0, 0)
+        let fromValue = CATransform3DMakeScale(1, 1, 0)
+        animation.fromValue = fromValue
+        animation.toValue = toValue
+        animation.duration = 5.0
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
+        snowmanImageView.layer.add(animation, forKey: nil)
+    }
+    
+    func heightAnimation(value: Double) {
+        if value == 0.0 { return }
+        let animation = CABasicAnimation(keyPath: "transform.scale.y")
+        let toValue = CATransform3DMakeScale(0, CGFloat(value), 0)
+        let fromValue = CATransform3DMakeScale(1, 1, 0)
+        animation.fromValue = fromValue
+        animation.toValue = toValue
+        animation.duration = 5.0
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
+        snowmanImageView.layer.add(animation, forKey: nil)
+    }
+    
+    func horizontalOffsetAnimation(value: Double) {
+        if value == 0.0 { return }
+        let animation = CABasicAnimation(keyPath: "transform")
+        let toValue = CATransform3DMakeTranslation(CGFloat(value), 0, 0)
+        animation.toValue = toValue
+        animation.duration = 5.0
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
+        snowmanImageView.layer.add(animation, forKey: nil)
+    }
+    
+    func verticalOffsetAnimation(value: Double) {
+        if value == 0.0 { return }
+        let animation = CABasicAnimation(keyPath: "transform")
+        let toValue = CATransform3DMakeTranslation(0, CGFloat(value), 0)
+        animation.toValue = toValue
+        animation.duration = 5.0
+        animation.fillMode = kCAFillModeForwards
+        animation.isRemovedOnCompletion = false
+        snowmanImageView.layer.add(animation, forKey: nil)
+    }
+    
+    func xFlipsAnimation(value: Double) {
+        if value == 0.0 { return }
+        let animation = CABasicAnimation(keyPath: "transform.rotation.x")
+        let angleRadian = CGFloat.pi * 2.0
+        animation.fromValue = 0
+        animation.byValue = angleRadian
+        animation.duration = 2
+        animation.repeatCount = Float(value)
+        snowmanImageView.layer.add(animation, forKey: nil)
+    }
+    
+    func yFlipsAnimation(value: Double) {
+        if value == 0.0 { return }
+        let animation = CABasicAnimation(keyPath: "transform.rotation.y")
+        let angleRadian = CGFloat.pi * 2.0
+        animation.fromValue = 0
+        animation.byValue = angleRadian
+        animation.duration = 2
+        animation.repeatCount = Float(value)
+        snowmanImageView.layer.add(animation, forKey: nil)
+    }
+    
+    func zFlipsAnimation(value: Double) {
+        if value == 0.0 { return }
+        let animation = CABasicAnimation(keyPath: "transform.rotation.z")
+        let angleRadian = CGFloat.pi * 2.0
+        animation.fromValue = 0
+        animation.byValue = angleRadian
+        animation.duration = 2
+        animation.repeatCount = Float(value)
+        snowmanImageView.layer.add(animation, forKey: nil)
+    }
+    
+    func borderSizeAnimation(value: Double) {
+        if value == 0.0 { return }
+        let animation = CABasicAnimation(keyPath: "borderWidth")
+        animation.fromValue = snowmanImageView.layer.borderWidth
+        animation.toValue = value
+        animation.duration = 5
+        snowmanImageView.layer.add(animation, forKey: nil)
+        snowmanImageView.layer.borderWidth = CGFloat(value)
+    }
+    
+    func pause(layer: CALayer) {
+        let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)
+        layer.speed = 0
+        layer.timeOffset = pausedTime
+    }
+    
+    func resume(layer: CALayer) {
+        let pausedTime = layer.timeOffset
+        layer.speed = 1
+        layer.timeOffset = 0
+        layer.beginTime = 0
+        let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        layer.beginTime = timeSincePause
+    }
     
     private func setupAnimationbutton() {
         addSubview(animationbutton)

@@ -16,6 +16,7 @@
 		E2AEC3262009130A00AC2D27 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AEC3252009130A00AC2D27 /* SettingsTableViewCell.swift */; };
 		E2AEC3282009256200AC2D27 /* SavedAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AEC3272009256200AC2D27 /* SavedAnimation.swift */; };
 		E2AEC32E200925DB00AC2D27 /* FileManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AEC32D200925DB00AC2D27 /* FileManagerHelper.swift */; };
+		E2AEC3302009371500AC2D27 /* UserAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AEC32F2009371500AC2D27 /* UserAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		E2AEC3252009130A00AC2D27 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		E2AEC3272009256200AC2D27 /* SavedAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAnimation.swift; sourceTree = "<group>"; };
 		E2AEC32D200925DB00AC2D27 /* FileManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerHelper.swift; sourceTree = "<group>"; };
+		E2AEC32F2009371500AC2D27 /* UserAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				E2AEC3272009256200AC2D27 /* SavedAnimation.swift */,
+				E2AEC32F2009371500AC2D27 /* UserAnimation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			files = (
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
 				E2AEC32420090C4000AC2D27 /* AnimationView.swift in Sources */,
+				E2AEC3302009371500AC2D27 /* UserAnimation.swift in Sources */,
 				E2AEC3282009256200AC2D27 /* SavedAnimation.swift in Sources */,
 				E2AEC32E200925DB00AC2D27 /* FileManagerHelper.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,

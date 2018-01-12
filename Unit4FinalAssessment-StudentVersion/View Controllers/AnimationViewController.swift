@@ -40,9 +40,6 @@ extension AnimationViewController: UIPickerViewDataSource {
         return FileManagerHelper.shared.getSavedAnimations()[row].animationName
     }
     
-    
 }
 
-extension AnimationViewController: UIPickerViewDelegate {
-    
-}
+extension AnimationViewController: UIPickerViewDelegate { }

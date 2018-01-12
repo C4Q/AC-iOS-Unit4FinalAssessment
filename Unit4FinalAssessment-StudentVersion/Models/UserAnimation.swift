@@ -1,5 +1,5 @@
 //
-//  SavedAnimation.swift
+//  Animation.swift
 //  Unit4FinalAssessment-StudentVersion
 //
 //  Created by Luis Calle on 1/12/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SavedAnimation: Codable {
-    let animationName: String
-    let userAnimations: [UserAnimation]
+struct UserAnimation: Codable {
+    let propertyName: PropertyName
+    let value: Double
 }
