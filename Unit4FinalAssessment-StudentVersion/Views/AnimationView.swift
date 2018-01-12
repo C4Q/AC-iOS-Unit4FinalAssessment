@@ -13,6 +13,7 @@ class AnimationView: UIView {
    
     lazy var imageView: UIImageView = {
         let iv = UIImageView()
+        iv.contentMode = .scaleAspectFit
         iv.backgroundColor = .cyan
         return iv
     }()
@@ -25,8 +26,9 @@ class AnimationView: UIView {
     
     lazy var button: UIButton = {
         let butt = UIButton()
+        butt.contentMode = .scaleAspectFit
         butt.setImage(#imageLiteral(resourceName: "icons8-play-50"), for: .normal)
-//        butt.addTarget(self, action: #selector(pause(layer: imageView.layer)), for: .touchUpInside)
+        butt.setImage(#imageLiteral(resourceName: "icons8-pause-100"), for: .selected)
         return butt
     }()
 

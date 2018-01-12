@@ -45,6 +45,26 @@ class SettingsViewController: UIViewController {
         view.addSubview(tableView)
         navigationItem.title = "Settings"
         layoutTableView()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonPressed))
+        
+    }
+    
+    @objc func addButtonPressed() {
+        let alertController = UIAlertController(title: "Add Setting", message: "Enter a name for your setting", preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: {
+            alert -> Void in
+            let firstTextField = alertController.textFields![0] as UITextField
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {
+            (action : UIAlertAction!) -> Void in
+        })
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Enter Settings name"
+        }
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func layoutTableView() {
@@ -69,6 +89,9 @@ class SettingsViewController: UIViewController {
 
 }
 
+
+
+
 extension SettingsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return properties.count
@@ -78,13 +101,16 @@ extension SettingsViewController: UITableViewDataSource {
         let property = properties[indexPath.section][indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsTableViewCell
         cell.nameLabel.text = "\(property.name.rawValue): 0.0"
-//        cell.contentView.addSubview(cell.stepper)
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return properties[section].count
     }
 }
+
+
+
+
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -94,6 +120,8 @@ extension SettingsViewController: UITableViewDelegate {
         case 1:
             return "Position Settings"
         //TO DO: Handle other sections
+        case 2:
+            return "Rotation Settings"
         default:
             return "Other Settings"
         }
