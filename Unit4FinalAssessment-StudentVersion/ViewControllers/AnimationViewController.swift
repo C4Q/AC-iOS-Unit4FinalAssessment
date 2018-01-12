@@ -11,6 +11,7 @@ import UIKit
 
 class AnimationViewController: UIViewController {
     
+    var paused = false
    let animationView = AnimationView()
     
     override func viewDidLoad() {
@@ -20,26 +21,39 @@ class AnimationViewController: UIViewController {
         self.view.backgroundColor = UIColor(red: 0.6, green: 0.6, blue: 0.9, alpha: 1.0)
         view.addSubview(animationView)
          defaultLayerValues()
-        animationView.button.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
-        animationView.button.isEnabled = false
+        animationView.button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
-    @objc func playButtonPressed() {
-            if animationView.button.isSelected {
-                    let animation = CABasicAnimation(keyPath: "contents")
-                    animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
-                    animation.fromValue = UIImage(named:"icons8-play-50")?.cgImage
-                    animation.toValue = UIImage(named:"icons8-pause-100")?.cgImage
-                    animation.duration = 2.0
-                    animationView.button.layer.add(animation, forKey: nil)
-                    animationView.button.layer.contents = UIImage(named: "icons8-pause-100")?.cgImage
-//            pause(layer: animationView.imageView.layer)
-                
-            } else {
-                animationView.button.isSelected = false
-//                resume(layer: animationView.imageView.layer)
-            }
+    @objc func buttonPressed(sender: UIButton)
+    {
+        if paused {
+            animationView.button.setImage(#imageLiteral(resourceName: "icons8-pause-100"), for: UIControlState.normal)
+            paused = !paused
+            pause(layer: animationView.imageView.layer)
+            
+        } else {
+            animationView.button.setImage(#imageLiteral(resourceName: "icons8-play-50"), for: UIControlState.normal)
+            paused = !paused
+            resume(layer: animationView.imageView.layer)
+        }
     }
+    
+//    @objc func playButtonPressed() {
+//            if animationView.button.isSelected {
+//                    let animation = CABasicAnimation(keyPath: "contents")
+//                    animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+//                    animation.fromValue = UIImage(named:"icons8-play-50")?.cgImage
+//                    animation.toValue = UIImage(named:"icons8-pause-100")?.cgImage
+//                    animation.duration = 2.0
+//                    animationView.button.layer.add(animation, forKey: nil)
+//                    animationView.button.layer.contents = UIImage(named: "icons8-pause-100")?.cgImage
+////            pause(layer: animationView.imageView.layer)
+//
+//            } else {
+//                animationView.button.isSelected = false
+////                resume(layer: animationView.imageView.layer)
+//            }
+//    }
     
     
     func pause(layer: CALayer) {
@@ -62,7 +76,6 @@ class AnimationViewController: UIViewController {
         animationView.imageView.layer.borderWidth = 1.0
         animationView.imageView.layer.borderColor = UIColor.black.cgColor
         animationView.imageView.layer.contents = UIImage(named:"snowman")?.cgImage
-        animationView.button.layer.contents = UIImage(named:"icons8-play-50")?.cgImage
     }
     
 }

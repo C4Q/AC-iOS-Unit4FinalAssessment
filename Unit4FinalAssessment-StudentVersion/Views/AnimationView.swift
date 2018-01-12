@@ -32,6 +32,9 @@ class AnimationView: UIView {
         return butt
     }()
 
+  
+    
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
