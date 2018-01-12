@@ -59,6 +59,8 @@ class AnimationViewController: UIViewController {
     
     @objc func buttonAction(sender: UIButton) {
         print("Button pushed")
+        animateRotationX()
+        
         switch currentAnimation {
         case SettingsKeys.Width.rawValue :
             animateWidth()
