@@ -9,7 +9,7 @@
 import Foundation
 
 class PersistanceModel {
-    static let kPath = "fave.plist"
+    static let kPath = "settings.plist"
     var favorites = [URL]() {
         didSet {
             saveFavorites()
