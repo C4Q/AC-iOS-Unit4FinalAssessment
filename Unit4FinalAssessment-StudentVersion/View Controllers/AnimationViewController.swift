@@ -31,6 +31,8 @@ class AnimationViewController: UIViewController {
         
         animationView.controlButton.addTarget(self, action: #selector(controlButtonTapped), for: .touchUpInside)
         
+        animationView.controlButton.isEnabled = false
+        
         
     }
     
@@ -63,6 +65,8 @@ class AnimationViewController: UIViewController {
         guard let loadedAnimation = loadedAnimation else { return }
         
         Animation.doAnimation(animation: loadedAnimation.animation, on: animationView.animationImageView)
+        
+        
     }
     
     /*
@@ -108,8 +112,10 @@ extension AnimationViewController: UIPickerViewDataSource {
 extension AnimationViewController: UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        animationView.controlButton.isEnabled = true
         loadedAnimation = animations[row]
         runAnimation()
+
     }
 
 }

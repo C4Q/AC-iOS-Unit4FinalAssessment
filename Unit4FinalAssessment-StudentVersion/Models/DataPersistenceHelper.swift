@@ -22,11 +22,13 @@ class DataPersistenceHelper {
     }
     
     // Save everytime it changes
-    private var favoriteAnimations = [UserAnimation]() {
+    private var favoriteAnimations: [UserAnimation] = [UserAnimation(name: "Default", animation: Animation(widthMultiplier: 1, heightMultiplier: 1, horizontalOffset: 0, verticalOffset: 0, duration: 1, flips: 0, opacity: 1, curvature: 0))] {
         didSet {
             saveFavoriteAnimations()
         }
     }
+
+
     
     // Gets the doc dir path
     func documentsDirectory() -> URL {

@@ -38,8 +38,8 @@ class AnimationView: UIView {
     // Play/Pause button
     lazy var controlButton: UIButton = {
        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "circled_play"), for: .normal)
-        button.setImage(#imageLiteral(resourceName: "cancel"), for: .selected)
+        button.setImage(#imageLiteral(resourceName: "cancel"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "circled_play"), for: .selected)
         return button
     }()
     
