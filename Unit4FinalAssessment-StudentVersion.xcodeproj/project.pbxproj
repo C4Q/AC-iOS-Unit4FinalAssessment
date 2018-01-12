@@ -13,6 +13,7 @@
 		54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10352007F256005FFA29 /* AnimationViewController.swift */; };
 		54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10372007F270005FFA29 /* SettingsViewController.swift */; };
 		939973CA2009252400F5752F /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939973C92009252400F5752F /* SettingsCell.swift */; };
+		939973CF20093EB400F5752F /* FileManagerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939973CE20093EB400F5752F /* FileManagerModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		54AE10352007F256005FFA29 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		54AE10372007F270005FFA29 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		939973C92009252400F5752F /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
+		939973CE20093EB400F5752F /* FileManagerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				54AE10232007F203005FFA29 /* AppDelegate.swift */,
+				939973CE20093EB400F5752F /* FileManagerModel.swift */,
 				939973CB2009252A00F5752F /* View Controllers */,
 				939973CC2009253A00F5752F /* Cells */,
 				939973CD2009254700F5752F /* Supporting Files */,
@@ -163,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
+				939973CF20093EB400F5752F /* FileManagerModel.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,
 				939973CA2009252400F5752F /* SettingsCell.swift in Sources */,
 				54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */,

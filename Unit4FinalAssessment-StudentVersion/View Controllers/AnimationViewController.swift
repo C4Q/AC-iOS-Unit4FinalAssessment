@@ -8,10 +8,32 @@
 
 import UIKit
 
+
+
+
+enum SettingsKeys: String {
+    case Width = "Width"
+    case Height = "Height"
+    case RotationX = "Rotation X"
+    case RotationY = "Rotation Y"
+    case RotationZ = "Rotation Z"
+}
+
+
+
 class AnimationViewController: UIViewController {
     
     var pauseOrPlay = "pause"
     var settingArr = [String]()
+    
+    let animatedSettings = [SettingsKeys.Width.rawValue,
+                            SettingsKeys.Height.rawValue,
+                            SettingsKeys.RotationX.rawValue,
+                            SettingsKeys.RotationY.rawValue,
+                            SettingsKeys.RotationZ.rawValue
+    ]
+    
+    
     
     //Snowman Image View
     lazy var snowmanImage: UIImageView = {
@@ -22,7 +44,7 @@ class AnimationViewController: UIViewController {
     
     //Picker View
     lazy var picker: UIPickerView = {
-       let picker = UIPickerView()
+        let picker = UIPickerView()
         return picker
     }()
     
@@ -56,14 +78,14 @@ class AnimationViewController: UIViewController {
         snowmanImage.translatesAutoresizingMaskIntoConstraints = false
         snowmanImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         snowmanImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).isActive = true
-    snowmanImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8).isActive = true
+        snowmanImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8).isActive = true
         snowmanImage.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         snowmanImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
     }
     
     func setUpPicker() {
         picker.translatesAutoresizingMaskIntoConstraints = false
-        picker.topAnchor.constraint(equalTo: snowmanImage.bottomAnchor, constant: 8).isActive = true
+        picker.topAnchor.constraint(equalTo: snowmanImage.bottomAnchor, constant: 10).isActive = true
         picker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         picker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         picker.bottomAnchor.constraint(equalTo: playPauseButton.topAnchor).isActive = true
@@ -94,12 +116,15 @@ extension AnimationViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-   
+        
         
         return 2
-            //settingArr.count
+        //settingArr.count
     }
     
     
     
 }
+
+
+
