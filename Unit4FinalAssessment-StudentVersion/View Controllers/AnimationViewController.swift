@@ -24,6 +24,7 @@ enum SettingsKeys: String {
 class AnimationViewController: UIViewController {
     
     var pauseOrPlay = "pause"
+    var settingChosen = ""
     var settingArr = [String]()
     
     let animatedSettings = [SettingsKeys.Width.rawValue,
@@ -59,22 +60,13 @@ class AnimationViewController: UIViewController {
     
     @objc func buttonAction(sender: UIButton) {
         print("Button pushed")
-        animateRotationX()
         
-        switch currentAnimation {
-        case SettingsKeys.Width.rawValue :
-            animateWidth()
-        case SettingsKeys.Height.rawValue:
-            animateHeight()
-        case SettingsKeys.RotationX.rawValue:
-            animateRotationX()
-        case SettingsKeys.RotationY.rawValue:
-            animateRotationY()
-        case SettingsKeys.RotationZ.rawValue:
-            animateRotationZ()
-        default:
-            break
+        if settingChosen == "Default" {
+            pause(layer: snowmanImage.layer)
+        } else if settingChosen == "Big Flip" {
+        animateRotationX()
         }
+        
     }
     
     override func viewDidLoad() {
@@ -88,27 +80,12 @@ class AnimationViewController: UIViewController {
         setUpPicker()
         self.picker.dataSource = self
         self.picker.delegate = self
+        settingArr = ["Default", "Big Flip"]
     }
     
     
     
-    @IBAction func play(button: UIButton) {
-        print("Button clicked")
-        switch currentAnimation {
-        case SettingsKeys.Width.rawValue :
-            animateWidth()
-        case SettingsKeys.Height.rawValue:
-            animateHeight()
-        case SettingsKeys.RotationX.rawValue:
-            animateRotationX()
-        case SettingsKeys.RotationY.rawValue:
-            animateRotationY()
-        case SettingsKeys.RotationZ.rawValue:
-            animateRotationZ()
-        default:
-            break
-        }
-    }
+
     
     
     
@@ -177,13 +154,45 @@ class AnimationViewController: UIViewController {
         playPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
     }
     
+    
+    
+    
+    func pause(layer: CALayer) {
+        let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)
+        layer.speed = 0
+        layer.timeOffset = pausedTime
+    }
+    
+    func resume(layer: CALayer) {
+        let pausedTime = layer.timeOffset
+        layer.speed = 1
+        layer.timeOffset = 0
+        layer.beginTime = 0
+        let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        layer.beginTime = timeSincePause
+    }
+    
+    
+    
+    
 }
 
 extension AnimationViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "Default"
+        return settingArr[row]
     }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        settingChosen = settingArr[row]
+        print(settingChosen)
+    }
+    
+    
+    
+    
+    
+    
     
 }
 
@@ -196,8 +205,7 @@ extension AnimationViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         
-        return 2
-        //settingArr.count
+        return settingArr.count
     }
     
     
