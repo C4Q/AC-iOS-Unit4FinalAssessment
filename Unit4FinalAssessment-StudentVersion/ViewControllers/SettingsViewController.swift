@@ -10,6 +10,11 @@ import UIKit
 
 enum PropertyName: String {
     case widthMultiplier = "Width Multiplier"
+    case heightMultiplier = "Height Multiplier"
+    case horiztionalOffset = "Horizontal Offset"
+    case verticalOffset = "Vertical Offset"
+    case rotationX = "Rotation X"
+    
     //TO DO: Add other PropertyName Cases
 }
 
@@ -26,7 +31,12 @@ class SettingsViewController: UIViewController {
     //TO DO: Add more properties
     var properties: [[AnimationProperty]] =
     [
-        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)]
+        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .horiztionalOffset, stepperMin: -100.0, stepperMax: 100.0, stepperIncrement: 10, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .verticalOffset, stepperMin: -100.0, stepperMax: 100.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .rotationX, stepperMin: 0, stepperMax: 50, stepperIncrement: 1, startingStepperVal: 0.0)]
+        
     ]
 
     
@@ -49,9 +59,14 @@ class SettingsViewController: UIViewController {
         let tv = UITableView()
         tv.dataSource = self
         tv.delegate = self
-        //TO DO: Register your subclass
+        tv.register(SettingsTableViewCell.self, forCellReuseIdentifier: "SettingsCell")
         return tv
     }()
+    
+    @objc func stepperValueChanged(_ sender:UIStepper!) {
+        print("UIStepper is now \(Int(sender.value))")
+    }
+
 }
 
 extension SettingsViewController: UITableViewDataSource {
@@ -61,8 +76,9 @@ extension SettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //TO DO: Implement your Custom Cell that has a stepper
         let property = properties[indexPath.section][indexPath.row]
-        let cell = UITableViewCell()
-        cell.textLabel?.text = property.name.rawValue
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsTableViewCell
+        cell.nameLabel.text = "\(property.name.rawValue): 0.0"
+//        cell.contentView.addSubview(cell.stepper)
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,6 +91,8 @@ extension SettingsViewController: UITableViewDelegate {
         switch section {
         case 0:
             return "Size Settings"
+        case 1:
+            return "Position Settings"
         //TO DO: Handle other sections
         default:
             return "Other Settings"
