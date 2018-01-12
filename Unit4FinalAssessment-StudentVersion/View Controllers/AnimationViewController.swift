@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class AnimationViewController: UIViewController {
     
     let animationView = AnimationView()
@@ -48,4 +50,30 @@ extension AnimationViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // return Settings.categorySet = Settings.settingName[row]
     }
+}
+
+
+// MARK: Animation Functions - usig core animation
+extension AnimationViewController {
+    func animateWidth() {
+       
+    }
+    
+    func animateHeight() {
+        
+    }
+    
+    func animateHorizontalPosition() {
+        
+    }
+    func animateVerticalPosition() {
+        
+    }
+    
+    func animateXAxis() {
+        
+    }
+
+    
+    
 }

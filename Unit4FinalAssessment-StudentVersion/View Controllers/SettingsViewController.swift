@@ -24,6 +24,16 @@ struct AnimationProperty {
     let startingStepperVal: Double
 }
 
+struct CustomSetting: Codable {
+    let widthMultiplier: Double
+    let heightMultiplier: Double
+    let horizontalOffset: Double
+    let verticalOffset: Double
+    let numberOfFlips: Double
+}
+
+
+
 class SettingsViewController: UIViewController {
     
     
@@ -36,13 +46,32 @@ class SettingsViewController: UIViewController {
         [AnimationProperty(name: .numberOfFlips, stepperMin: 0.0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0)]
         
     ]
-
+    
+    var currentSettings = CustomSetting(widthMultiplier: 0.0, heightMultiplier: 0, horizontalOffset: 0, verticalOffset: 0, numberOfFlips: 0) {
+        didSet {
+            print("current settings modified: \(currentSettings)")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
         navigationItem.title = "Settings"
         layoutTableView()
+        
+        
+        let saveBarItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveToFavorites))
+        navigationItem.rightBarButtonItem = saveBarItem
+        
+    }
+    
+    @objc func saveToFavorites() {
+        // save to favorites
+//        guard let currentSetting = CustomSetting else { return }
+//        let _ = FileManagerHelper.manager.addToSettings(name: "TEST", andSetting: customSetting)
+        print("save button pressed")
+        
+        
         
     }
     
@@ -75,12 +104,9 @@ extension SettingsViewController: UITableViewDataSource {
         let property = properties[indexPath.section][indexPath.row]
         let cell = SettingTableViewCell()
         cell.settingNameLabel.text = property.name.rawValue
-//        cell.stepperValueLabel.text = "\(cell.settingStepper.value)"
-//        cell.settingStepper.minimumValue = property.stepperMin
-//        cell.settingStepper.maximumValue = property.stepperMax
-//        cell.settingStepper.stepValue = property.stepperIncrement
         cell.configureCell(property: property)
-
+        /// current setting .name = value
+        
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

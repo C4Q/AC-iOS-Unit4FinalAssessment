@@ -14,6 +14,8 @@
 		54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10372007F270005FFA29 /* SettingsViewController.swift */; };
 		810F251E2009118D00FB833C /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F251D2009118D00FB833C /* SettingTableViewCell.swift */; };
 		810F25212009207E00FB833C /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F25202009207E00FB833C /* AnimationView.swift */; };
+		810F25242009432C00FB833C /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F25232009432C00FB833C /* FileManager.swift */; };
+		810F2527200959FF00FB833C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 810F2526200959FF00FB833C /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		54AE10372007F270005FFA29 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		810F251D2009118D00FB833C /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		810F25202009207E00FB833C /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		810F25232009432C00FB833C /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		810F2526200959FF00FB833C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +62,9 @@
 		54AE10222007F203005FFA29 /* Unit4FinalAssessment-StudentVersion */ = {
 			isa = PBXGroup;
 			children = (
+				810F2526200959FF00FB833C /* README.md */,
 				810F251B20090CAC00FB833C /* Supporting Files */,
+				810F25252009433300FB833C /* Service */,
 				810F251C20090CB800FB833C /* View Controllers */,
 				810F25222009386100FB833C /* Views */,
 				810F251F2009119200FB833C /* Custom Cell */,
@@ -100,6 +106,14 @@
 				810F25202009207E00FB833C /* AnimationView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		810F25252009433300FB833C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				810F25232009432C00FB833C /* FileManager.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				810F2527200959FF00FB833C /* README.md in Resources */,
 				54AE102E2007F203005FFA29 /* LaunchScreen.storyboard in Resources */,
 				54AE102B2007F203005FFA29 /* Assets.xcassets in Resources */,
 			);
@@ -176,6 +191,7 @@
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
 				810F25212009207E00FB833C /* AnimationView.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,
+				810F25242009432C00FB833C /* FileManager.swift in Sources */,
 				810F251E2009118D00FB833C /* SettingTableViewCell.swift in Sources */,
 				54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */,
 			);

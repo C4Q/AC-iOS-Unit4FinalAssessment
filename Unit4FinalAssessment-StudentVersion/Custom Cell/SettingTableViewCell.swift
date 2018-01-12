@@ -42,9 +42,6 @@ class SettingTableViewCell: UITableViewCell {
     // STEPPER OBJECT
     lazy var settingStepper: UIStepper = {
        let stepper = UIStepper()
-        
-
-    
         return stepper
     }()
     
@@ -56,17 +53,19 @@ class SettingTableViewCell: UITableViewCell {
         return label
     }()
     
-    /// Credit: http://www.danieledonzelli.com/ios/uistepper-tutorial/
+    // Credit: http://www.danieledonzelli.com/ios/uistepper-tutorial/
     @objc func progStepperSetValue(sender: UIStepper!) {
         let stepperValue = Double(sender.value)
         stepperValueLabel.text = String(stepperValue)
+        /// current setting .name = value
+        
+        print("\(settingNameLabel.text!): \(stepperValue)")
     }
     
     func configureCell(property: AnimationProperty) {
         settingStepper.minimumValue = property.stepperMin
         settingStepper.maximumValue = property.stepperMax
         settingStepper.stepValue = property.stepperIncrement
-        
     }
     
     
