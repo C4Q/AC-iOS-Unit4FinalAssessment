@@ -23,6 +23,14 @@ class AnimationViewController: UIViewController {
         animationView.pickerView.delegate = self
         navigationItem.title = "Animation"
     }
+    
+    
+    func defaultLayerValues() {
+        let width = animationView.snowmanImage.layer.contentsRect.width
+        
+    }
+    
+    
 }
 
 extension AnimationViewController: UIPickerViewDataSource {
@@ -55,24 +63,59 @@ extension AnimationViewController: UIPickerViewDelegate {
 
 // MARK: Animation Functions - usig core animation
 extension AnimationViewController {
-    func animateWidth() {
-       
+    
+    func animateWidthMultiplier() {
+
     }
     
-    func animateHeight() {
-        
-    }
-    
-    func animateHorizontalPosition() {
-        
-    }
-    func animateVerticalPosition() {
+    func animateHeightMultiplier() {
         
     }
     
-    func animateXAxis() {
+
+    
+    
+    func animateImage() {
+        // WIDTH MULTIPLIER
+        let widthMultiplierAnimation = CABasicAnimation(keyPath: "transform.scale.x")
+//        widthMultiplierAnimation.toValue = \(value of this stepper)
+        
+        
+        // HEIGHT MULTIPLIER
+        let heightMultiplierAnimation = CABasicAnimation(keyPath: "transform.scale.y")
+//        heightMultiplierAnimation.toValue = \(value of this stepper)
+        
+        
+        // HORIZONTAL OFFSET
+        let horizontalOffsetAnimation = CABasicAnimation(keyPath: "transform")
+        horizontalOffsetAnimation.toValue = CATransform3DMakeTranslation(-100, 0, 0)
+//        animationView.snowmanImage.layer.add(horizontalOffsetAnimation, forKey: nil)
+        
+        
+        // VERTICAL OFFSET
+        let verticalOffsetAnimation = CABasicAnimation(keyPath: "transform")
+        verticalOffsetAnimation.toValue = CATransform3DMakeTranslation(0, -100, 0)
+//        animationView.snowmanImage.layer.add(verticalOffsetAnimation, forKey: nil)
+        
+        
+        // NUMBER OF FLIPS
+        let xAxisAnimation = CABasicAnimation(keyPath: "transform.rotation.x")
+        let angleRadian = CGFloat(2.0 * .pi) // 360
+        xAxisAnimation.fromValue = 0 // degrees
+        xAxisAnimation.byValue = angleRadian
+        xAxisAnimation.repeatCount = Float.infinity
+//        animationView.snowmanImage.layer.add(xAxisAnimation, forKey: nil)
+        
+        
+        /// list all of the animations above in this one function and group them here in the array.
+        let groupAnimation = CAAnimationGroup()
+        groupAnimation.animations = [widthMultiplierAnimation, heightMultiplierAnimation, verticalOffsetAnimation, horizontalOffsetAnimation, xAxisAnimation]
+        groupAnimation.duration = 1.0
+        animationView.snowmanImage.layer.add(groupAnimation, forKey: nil)
+        
         
     }
+
 
     
     

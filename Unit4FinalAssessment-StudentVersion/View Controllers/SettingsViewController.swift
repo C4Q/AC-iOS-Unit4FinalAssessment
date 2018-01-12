@@ -32,10 +32,7 @@ struct CustomSetting: Codable {
     let numberOfFlips: Double
 }
 
-
-
 class SettingsViewController: UIViewController {
-    
     
     var properties: [[AnimationProperty]] =
     [
@@ -47,11 +44,14 @@ class SettingsViewController: UIViewController {
         
     ]
     
-    var currentSettings = CustomSetting(widthMultiplier: 0.0, heightMultiplier: 0, horizontalOffset: 0, verticalOffset: 0, numberOfFlips: 0) {
-        didSet {
-            print("current settings modified: \(currentSettings)")
-        }
-    }
+    
+//    var currentSettings = CustomSetting.init(widthMultiplier: <#T##Double#>, heightMultiplier: <#T##Double#>, horizontalOffset: <#T##Double#>, verticalOffset: <#T##Double#>, numberOfFlips: <#T##Double#>) {
+//        didSet {
+//            print("current settings modified: \(currentSettings)")
+//        }
+//    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +69,28 @@ class SettingsViewController: UIViewController {
         // save to favorites
 //        guard let currentSetting = CustomSetting else { return }
 //        let _ = FileManagerHelper.manager.addToSettings(name: "TEST", andSetting: customSetting)
+        
+        /// Alert Window with Title, Subtitle, TextField, Cancel and OK
+        
+//        let _ = FileManagerHelper.manager.addToSettings(name: <#T##String#>, andSetting: currentSettings)
+        
+        let alertController = UIAlertController(title: "Add Setting", message: "Enter a name for your setting", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+            print("Pressed OK to Save")
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        alertController.addTextField { (textField: UITextField) in
+            textField.placeholder = "Enter a name for your setting"
+            
+        }
+        self.present(alertController, animated: true, completion: nil)
+        
+        
         print("save button pressed")
         
         
@@ -100,12 +122,11 @@ extension SettingsViewController: UITableViewDataSource {
         return properties.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        ///TO DO: Implement your Custom Cell that has a stepper
         let property = properties[indexPath.section][indexPath.row]
         let cell = SettingTableViewCell()
         cell.settingNameLabel.text = property.name.rawValue
         cell.configureCell(property: property)
-        /// current setting .name = value
+        
         
         return cell
     }
