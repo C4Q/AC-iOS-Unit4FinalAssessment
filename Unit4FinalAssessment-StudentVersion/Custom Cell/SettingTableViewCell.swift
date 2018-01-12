@@ -29,6 +29,7 @@ class SettingTableViewCell: UITableViewCell {
     
     private func setupViews() {
         setupConstraints()
+        settingStepper.addTarget(self, action: #selector(progStepperSetValue), for: .valueChanged)
     }
     
     // SETTING NAME LABEL
@@ -54,8 +55,15 @@ class SettingTableViewCell: UITableViewCell {
     lazy var stepperValueLabel: UILabel = {
        let label = UILabel()
         label.text = "0.0"
+        /// TODO: CONNECT THE STEPPER FEEDBACK, LIMITS FROM PROPERTIES
         return label
     }()
+    
+    
+    @objc func progStepperSetValue(sender: UIStepper!) {
+        let stepperValue = Int(sender.value)
+        stepperValueLabel.text = String(stepperValue)
+    }
     
     
     func setupConstraints() {

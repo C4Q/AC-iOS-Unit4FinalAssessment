@@ -25,7 +25,8 @@ struct AnimationProperty {
 }
 
 class SettingsViewController: UIViewController {
-
+    
+    
     var properties: [[AnimationProperty]] =
     [
         [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
@@ -42,7 +43,9 @@ class SettingsViewController: UIViewController {
         view.addSubview(tableView)
         navigationItem.title = "Settings"
         layoutTableView()
+        
     }
+    
     
     // table view constrained to the entire Settings Tab View
     func layoutTableView() {
