@@ -13,16 +13,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        FileManagerHelper.shared.loadSavedAnimations()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         let tbc = UITabBarController()
         let avc = AnimationViewController()
-        avc.tabBarItem = UITabBarItem(title: "Animation", image: nil, tag: 0)
+        avc.tabBarItem = UITabBarItem(title: "Animation", image: #imageLiteral(resourceName: "animationBar"), tag: 0)
         let svc = SettingsViewController()
         let navCon = UINavigationController(rootViewController: svc)
-        svc.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 1)
+        svc.tabBarItem = UITabBarItem(title: "Settings", image: #imageLiteral(resourceName: "settingsbar"), tag: 1)
         tbc.viewControllers = [avc, navCon]
         window?.rootViewController = tbc
         window?.makeKeyAndVisible()
