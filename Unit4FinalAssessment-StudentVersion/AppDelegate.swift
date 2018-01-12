@@ -15,17 +15,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         // Override point for customization after application launch.
-        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        //Create Tab Bar Controller
         let tbc = UITabBarController()
+        
+        //Create Animation View Controller and placing it in tab one
         let avc = AnimationViewController()
-        avc.tabBarItem = UITabBarItem(title: "Animation", image: nil, tag: 0)
+        avc.tabBarItem = UITabBarItem(title: "Animation", image: UIImage(named: "image"), tag: 0)
+        
+        //Create Settings View Controller, place it in a navigation controller, and place that nav controller in tab two
         let svc = SettingsViewController()
         let navCon = UINavigationController(rootViewController: svc)
-        svc.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 1)
+        svc.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(named: "settings"), tag: 1)
+        
+        //Declare all tabs to be used in tab bar controller
         tbc.viewControllers = [avc, navCon]
+        
+        //set window to be entire witdth of screen
+        window = UIWindow(frame: UIScreen.main.bounds)
+        //set window's rrot VC to myVC
         window?.rootViewController = tbc
+        //make view visable on screen
         window?.makeKeyAndVisible()
+        
         return true
     }
 

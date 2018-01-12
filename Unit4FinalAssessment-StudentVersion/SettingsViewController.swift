@@ -8,27 +8,40 @@
 
 import UIKit
 
+// Looks like we're not using a view for this assessment.
+
+
 enum PropertyName: String {
+    
     case widthMultiplier = "Width Multiplier"
-    //TO DO: Add other PropertyName Cases
+    case hightMultiplier = "Height Multiplier"
+    case horizontalPosition = "Horizontal Position Offset"
+    case verticalPosition = "Vertical Position Offset"
+    case xAxisRotation = "X Axis Rotation Multiplier"
+    
+    
 }
 
 struct AnimationProperty {
-    let name: PropertyName
-    let stepperMin: Double
-    let stepperMax: Double
-    let stepperIncrement: Double
-    let startingStepperVal: Double
+    let name: PropertyName //Name
+    let stepperMin: Double //Lowest number stepper can be
+    let stepperMax: Double //Highest number stepper can be
+    let stepperIncrement: Double //number that stepper increments by
+    let startingStepperVal: Double //starting value of stepper
 }
 
 class SettingsViewController: UIViewController {
 
     //TO DO: Add more properties
+    
+    // TODO: The var properties is the name of the DEFAULT values for the animations. Therefore, saving a new set of animation values and giving it a name is the goal for this assessment.
+    
     var properties: [[AnimationProperty]] =
     [
         [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)]
     ]
-
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
