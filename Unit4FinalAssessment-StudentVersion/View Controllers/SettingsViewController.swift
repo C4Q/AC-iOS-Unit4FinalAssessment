@@ -10,7 +10,10 @@ import UIKit
 
 enum PropertyName: String {
     case widthMultiplier = "Width Multiplier"
-    //TO DO: Add other PropertyName Cases
+    case heightMultiplier = "Height Multiplier"
+    case horizontalOffset = "Horizontal Offset"
+    case verticalOffset = "Vertical Offset"
+    case numberOfFlips = "Number Of Flips"
 }
 
 struct AnimationProperty {
@@ -23,10 +26,14 @@ struct AnimationProperty {
 
 class SettingsViewController: UIViewController {
 
-    //TO DO: Add more properties
     var properties: [[AnimationProperty]] =
     [
-        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)]
+        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .horizontalOffset, stepperMin: -100.0, stepperMax: 100.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .verticalOffset, stepperMin: -100.0, stepperMax: 100.0, stepperIncrement: 20.0, startingStepperVal: 0.0)],
+        [AnimationProperty(name: .numberOfFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0)]
+        
     ]
 
     
@@ -37,6 +44,7 @@ class SettingsViewController: UIViewController {
         layoutTableView()
     }
     
+    // table view constrained to the entire Settings Tab View
     func layoutTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -45,11 +53,12 @@ class SettingsViewController: UIViewController {
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
     }
     
+    // create the table view object
     lazy var tableView: UITableView = {
         let tv = UITableView()
         tv.dataSource = self
         tv.delegate = self
-        //TO DO: Register your subclass
+        tv.register(SettingTableViewCell.self, forCellReuseIdentifier: "Setting Cell")
         return tv
     }()
 }
@@ -59,38 +68,42 @@ extension SettingsViewController: UITableViewDataSource {
         return properties.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //TO DO: Implement your Custom Cell that has a stepper
+        ///TO DO: Implement your Custom Cell that has a stepper
         let property = properties[indexPath.section][indexPath.row]
-        let cell = UITableViewCell()
-        cell.textLabel?.text = property.name.rawValue
+        let cell = SettingTableViewCell()
+        cell.settingNameLabel.text = property.name.rawValue
+        cell.stepperValueLabel.text = "\(cell.settingStepper.value)"
+        cell.settingStepper.minimumValue = property.stepperMin
+        cell.settingStepper.maximumValue = property.stepperMax
+        cell.settingStepper.stepValue = property.stepperIncrement
+
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return properties[section].count
     }
+    
 }
 
 extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        /// TODO: FIX THE HEADERS
+        
         switch section {
-        case 0:
+        case 0, 1:
             return "Size Settings"
-        //TO DO: Handle other sections
+        case 2, 3:
+            return "Position Settings"
         default:
             return "Other Settings"
         }
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
 }
-
-
-
-
-
-
-
 
 
 
