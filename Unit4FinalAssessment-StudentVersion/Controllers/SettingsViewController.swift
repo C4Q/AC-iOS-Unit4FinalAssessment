@@ -30,7 +30,7 @@ struct AnimationProperty {
 }
 class SettingsViewController: UIViewController {
     var delegate: MySettingsDelegate?
-
+    
     //TO DO: Add more properties...DONE
     var properties: [[AnimationProperty]] =
     [
@@ -46,15 +46,15 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(tableView)
         navigationItem.title = "Settings"
-        //Add button created
+        //Add new setting button created
         let addSettingButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewSettingButton))
         navigationItem.rightBarButtonItem = addSettingButtonItem
         layoutTableView()
     }
     
     @objc func addNewSettingButton() {
+        //TODO: save the entry in file manager
         delegate?.newSettingAdded()
-        //TODO: add alert view controller with text field
         let alertController = UIAlertController(title: "Add Setting", message: "Enter a name for your setting", preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {
@@ -62,9 +62,8 @@ class SettingsViewController: UIViewController {
             let textField = alertController.textFields![0]
             self.delegate?.newSettingAdded()
             // do something with textField
-            
-            
         }))
+        
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         alertController.addTextField(configurationHandler: {(textField : UITextField!) -> Void in
@@ -86,7 +85,7 @@ class SettingsViewController: UIViewController {
         let tv = UITableView()
         tv.dataSource = self
         tv.delegate = self
-        //TO DO: Register your subclass
+        //TODO: Register your subclass
         //self.tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "SettingCell")
         return tv
     }()
@@ -99,13 +98,15 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //TO DO: Implement your Custom Cell that has a stepper DO THIS
+        //TO DO: Implement your Custom Cell that has a stepper
         let cell = UITableViewCell()
         //let cell = self.tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as! CustomTableViewCell
         let property = properties[indexPath.section][indexPath.row]
-        cell.textLabel?.text = property.name.rawValue
-        
-        
+        cell.textLabel?.text = "\(property.name.rawValue):"
+        //Adding stepper
+        let stepper = UIStepper()
+        stepper.frame = CGRect(x: 300, y: 30, width: 70, height: 50)
+        cell.contentView.addSubview(stepper)
         return cell
     }
     

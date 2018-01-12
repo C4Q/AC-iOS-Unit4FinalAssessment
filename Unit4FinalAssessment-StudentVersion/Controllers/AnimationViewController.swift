@@ -8,10 +8,8 @@
 
 import UIKit
 
-class AnimationViewController: UIViewController, MySettingsDelegate {
+class AnimationViewController: UIViewController, MySettingsDelegate {//conformed to my protocol
 
-    //conformed to my protocol
-    //TODO: set the image up with the picker in the bottom
     //Snowman Image setup
     lazy var snowmanImage: UIImageView = {
         let image = UIImageView()
@@ -43,11 +41,11 @@ class AnimationViewController: UIViewController, MySettingsDelegate {
         if myButton.imageView?.image == #imageLiteral(resourceName: "pause") {
             myButton.imageView?.image = #imageLiteral(resourceName: "play")
         } else {
-            myButton.imageView?.image = #imageLiteral(resourceName: "pause")
+            myButton.imageView?.image = #imageLiteral(resourceName: "play")
         }
     }
     
-    var pickerValues = ["Default", "one", "two", "three"]
+    var pickerValues = ["Default", "Setting One", "Setting Two", "Setting Three"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

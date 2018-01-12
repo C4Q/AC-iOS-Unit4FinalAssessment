@@ -13,6 +13,7 @@
 		54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10352007F256005FFA29 /* AnimationViewController.swift */; };
 		54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10372007F270005FFA29 /* SettingsViewController.swift */; };
 		810F2AEF200924AC00C2BDB4 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810F2AEE200924AC00C2BDB4 /* CustomTableViewCell.swift */; };
+		8161539C2009633300F5024E /* AnimationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8161539B2009633300F5024E /* AnimationSetting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		54AE10352007F256005FFA29 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		54AE10372007F270005FFA29 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		810F2AEE200924AC00C2BDB4 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		8161539B2009633300F5024E /* AnimationSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSetting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		54AE10222007F203005FFA29 /* Unit4FinalAssessment-StudentVersion */ = {
 			isa = PBXGroup;
 			children = (
+				8161539A2009631F00F5024E /* Model */,
 				810F2AED20090D8D00C2BDB4 /* Views */,
 				810F2AEC20090D7F00C2BDB4 /* Controllers */,
 				810F2AEB20090D6400C2BDB4 /* Supporting Files */,
@@ -89,6 +92,14 @@
 				810F2AEE200924AC00C2BDB4 /* CustomTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8161539A2009631F00F5024E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8161539B2009633300F5024E /* AnimationSetting.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
+				8161539C2009633300F5024E /* AnimationSetting.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,
 				810F2AEF200924AC00C2BDB4 /* CustomTableViewCell.swift in Sources */,
 				54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */,
