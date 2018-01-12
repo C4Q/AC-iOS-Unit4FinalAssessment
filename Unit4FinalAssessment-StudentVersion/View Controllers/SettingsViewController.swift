@@ -12,7 +12,7 @@ import UIKit
  - Put animations in correct section
  */
 
-enum PropertyName: String {
+enum PropertyName: String, Codable {
     case widthMultiplier = "Width Multiplier"
     case heightMultiplier = "Height Multiplier"
     case horizontalPosition = "Horizontal Position"
@@ -22,7 +22,7 @@ enum PropertyName: String {
     //TO DO: Add other PropertyName Cases
 }
 
-struct AnimationProperty {
+struct AnimationProperty: Codable {
     let name: PropertyName
     let stepperMin: Double
     let stepperMax: Double
@@ -50,7 +50,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(tableView)
         navigationItem.title = "Settings"
-        saveSettings()
+        setUpSaveButton()
         layoutTableView()
     }
     
@@ -61,9 +61,29 @@ class SettingsViewController: UIViewController {
     
 
     @objc func saveSettings() {
+        let alertController =  UIAlertController(title: "Save Setting", message: "Enter New Setting Name", preferredStyle: .alert)
+        alertController.addTextField { (UITextField) in
+            UITextField.placeholder = "Enter Setting Name"
+        }
         
+        let saveSet = UIAlertAction(title: "Save", style: .default){ (_) in
+        if let settingName = alertController.textFields?[0].text {
+            FileManagerHelper.manager.saveUserAnimationSettings(with: settingName, and: self.properties[0])
+            FileManagerHelper.manager.addNewSetting(setting: self.properties[0])
+            FileManagerHelper.manager.addSettingName(name: settingName)
+            print("New Setting Saved: \(self.properties)")
+        
+        }
+        }
+        let cancelSave = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(saveSet)
+        alertController.addAction(cancelSave)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
+ 
     
     func layoutTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -116,6 +136,8 @@ extension SettingsViewController: UITableViewDelegate {
             return "Other Settings"
         }
     }
+   
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
@@ -127,70 +149,70 @@ extension SettingsViewController: UITableViewDelegate {
 //    }
 }
 
-extension SettingsViewController {
-    
-    
-    public func widthAnimaton(using imageView: UIImageView) {
-        let animation = CABasicAnimation(keyPath: "transform.scale.x")
-        animation.fromValue = 0
-        animation.byValue = properties[0][0].stepperIncrement
-//        animation.toValue = properties[0][0].stepperMax
-        animation.duration = 2.0
-        imageView.layer.add(animation, forKey: nil)
-        
-    }
-    
-    public func heightAnimation(using imageView: UIImageView) {
-        let animation = CABasicAnimation(keyPath: "transform.scale.y")
-        animation.fromValue = 0
-        animation.byValue = properties[0][1].stepperIncrement
-//        animation.toValue = stepper.maximumValue
-        animation.duration = 2.0
-        imageView.layer.add(animation, forKey: nil)
-        
-    }
-    
-   public  func horizontalAnimation(using imageView: UIImageView) {
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.fromValue = imageView.layer.position
-//        animation.toValue = CGPoint(x: (imageView.layer.position.x + CGFloat(stepper.stepValue)) , y: imageView.layer.position.y)
-        animation.byValue = CGPoint(x: (imageView.layer.position.x + CGFloat(properties[0][2].stepperIncrement)) , y: imageView.layer.position.y)
-        animation.duration = 2.0
-        imageView.layer.add(animation, forKey: nil)
-        
-    }
-    
-    public func verticalAnimation(using imageView: UIImageView, change stepper: UIStepper) {
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.fromValue = imageView.layer.position
-        animation.byValue = CGPoint(x: imageView.layer.position.x, y: (imageView.layer.position.y + CGFloat(properties[0][3].stepperIncrement)))
-        animation.duration = 2.0
-        imageView.layer.add(animation, forKey: nil)
-        
-    }
-    
-    public func xRotationAnimation(using imageView: UIImageView) {
-        let  animation = CABasicAnimation(keyPath: "transform.rotation.x")
-        animation.fromValue = 0
-        animation.byValue = properties[0][4].stepperIncrement
-        animation.duration = 3.0
-        imageView.layer.add(animation, forKey: nil)
-    }
-    
-   public func yRotationAnimation(using imageView: UIImageView) {
-        let animation = CABasicAnimation(keyPath: "transform.rotation.y")
-        animation.fromValue = 0
-        animation.byValue = properties[0][5].stepperIncrement
-        animation.duration = 3.0
-        imageView.layer.add(animation, forKey: nil)
-    }
-    
-    
-    
-}
-
-
-
+//extension SettingsViewController {
+//    
+//    
+//    public func widthAnimaton(using imageView: UIImageView) {
+//        let animation = CABasicAnimation(keyPath: "transform.scale.x")
+//        animation.fromValue = 0
+//        animation.byValue = properties[0][0].stepperIncrement
+////        animation.toValue = properties[0][0].stepperMax
+//        animation.duration = 2.0
+//        imageView.layer.add(animation, forKey: nil)
+//        
+//    }
+//    
+//    public func heightAnimation(using imageView: UIImageView) {
+//        let animation = CABasicAnimation(keyPath: "transform.scale.y")
+//        animation.fromValue = 0
+//        animation.byValue = properties[0][1].stepperIncrement
+////        animation.toValue = stepper.maximumValue
+//        animation.duration = 2.0
+//        imageView.layer.add(animation, forKey: nil)
+//        
+//    }
+//    
+//   public  func horizontalAnimation(using imageView: UIImageView) {
+//        let animation = CABasicAnimation(keyPath: "position")
+//        animation.fromValue = imageView.layer.position
+////        animation.toValue = CGPoint(x: (imageView.layer.position.x + CGFloat(stepper.stepValue)) , y: imageView.layer.position.y)
+//        animation.byValue = CGPoint(x: (imageView.layer.position.x + CGFloat(properties[0][2].stepperIncrement)) , y: imageView.layer.position.y)
+//        animation.duration = 2.0
+//        imageView.layer.add(animation, forKey: nil)
+//        
+//    }
+//    
+//    public func verticalAnimation(using imageView: UIImageView, change stepper: UIStepper) {
+//        let animation = CABasicAnimation(keyPath: "position")
+//        animation.fromValue = imageView.layer.position
+//        animation.byValue = CGPoint(x: imageView.layer.position.x, y: (imageView.layer.position.y + CGFloat(properties[0][3].stepperIncrement)))
+//        animation.duration = 2.0
+//        imageView.layer.add(animation, forKey: nil)
+//        
+//    }
+//    
+//    public func xRotationAnimation(using imageView: UIImageView) {
+//        let  animation = CABasicAnimation(keyPath: "transform.rotation.x")
+//        animation.fromValue = 0
+//        animation.byValue = properties[0][4].stepperIncrement
+//        animation.duration = 3.0
+//        imageView.layer.add(animation, forKey: nil)
+//    }
+//    
+//   public func yRotationAnimation(using imageView: UIImageView) {
+//        let animation = CABasicAnimation(keyPath: "transform.rotation.y")
+//        animation.fromValue = 0
+//        animation.byValue = properties[0][5].stepperIncrement
+//        animation.duration = 3.0
+//        imageView.layer.add(animation, forKey: nil)
+//    }
+//    
+//    
+//    
+//}
+//
+//
+//
 
 
 

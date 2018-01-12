@@ -28,9 +28,9 @@ class AnimationView: UIView {
     
     lazy var animateButton: UIButton = {
         let button = UIButton()
-//        button.imageView?.image = #imageLiteral(resourceName: "pauseButton")
-//        button.imageView?.contentMode = UIViewContentMode.scaleAspectFill
-//        button.tintColor = UIColor(red: 46/255, green: 184/255, blue: 230/255, alpha: 1.0)
+        button.imageView?.image = #imageLiteral(resourceName: "playButton")
+        button.imageView?.contentMode = UIViewContentMode.scaleAspectFill
+        //        button.tintColor = UIColor(red: 46/255, green: 184/255, blue: 230/255, alpha: 1.0)
         button.backgroundColor = UIColor(red: 46/255, green: 184/255, blue: 230/255, alpha: 1.0)
         return button
     }()
@@ -73,7 +73,7 @@ class AnimationView: UIView {
         NSLayoutConstraint.activate([
             savedSettingsPicker.centerXAnchor.constraint(equalTo: centerXAnchor),
             savedSettingsPicker.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 100),
-          savedSettingsPicker.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            savedSettingsPicker.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
             savedSettingsPicker.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.2)
             ])
     }
@@ -82,9 +82,9 @@ class AnimationView: UIView {
         NSLayoutConstraint.activate([
             animateButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             animateButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 200),
-//            animateButton.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.1),
-//            animateButton.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.1)
-//
+            //            animateButton.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.1),
+            //            animateButton.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.1)
+            //
             ])
     }
     

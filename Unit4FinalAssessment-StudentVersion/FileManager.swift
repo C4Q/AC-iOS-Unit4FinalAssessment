@@ -15,46 +15,71 @@ class FileManagerHelper {
     
     private var savedSettings = [[AnimationProperty]]() {
         didSet {
-
+            saveAnimationSettings()
         }
     }
     
-    private func saveUserAnimationSettings (with string: String, and settings: [AnimationProperty]) {
-     
+    private var savedNames = [String]() {
+        didSet{
+            saveAnimationSettings()
+        }
+    }
+    
+    func saveUserAnimationSettings (with string: String, and settings: [AnimationProperty]) {
+        
         let url = dataFilePath(withPathName: string)
-       
-        
         do {
-
+            let encodedData = try PropertyListEncoder().encode(settings)
+            try encodedData.write(to: url)
         }
-        catch {
-            
+        catch let error {
+            print(error.localizedDescription)
         }
     }
     
-
     
-    func saveAnimationNames() {
-        
-    }
     
-    private func loadSettings() {
+    func saveAnimationSettings() {
+        let filePath = dataFilePath(withPathName: savedSettingsPath)
         do {
-            
+            let data = try PropertyListEncoder().encode(savedSettings)
+            try data.write(to: filePath)
         }
-        
-        catch {
-            
+        catch let error {
+            print(error.localizedDescription)
         }
     }
     
-    func addNewSetting() {
-        
+    
+    func addNewSetting(setting: [AnimationProperty]) {
+        savedSettings.append(setting)
     }
     
-  func loadAllAnimations() {
-        
+    func addSettingName(name: String) {
+        savedNames.append(name)
     }
+    
+    func loadAllAnimations() {
+        let filePath = dataFilePath(withPathName: savedSettingsPath)
+        do {
+            let data = try Data.init(contentsOf: filePath)
+            let savedSettings = try PropertyListDecoder().decode([[AnimationProperty]].self, from: data)
+            self.savedSettings = savedSettings
+        }
+            
+        catch let error {
+            print(error)
+        }
+    }
+    
+    func getAllAnimations() -> [[AnimationProperty]] {
+        return savedSettings
+    }
+    
+    func getAllAnimationNames() -> [String] {
+        return savedNames
+    }
+
     
     
     private func documentsDirectory() -> URL {
