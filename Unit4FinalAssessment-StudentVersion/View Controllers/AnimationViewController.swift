@@ -32,9 +32,8 @@ class AnimationViewController: UIViewController {
                             SettingsKeys.RotationY.rawValue,
                             SettingsKeys.RotationZ.rawValue
     ]
-    
-    
-    
+    var currentAnimation: String = ""
+
     //Snowman Image View
     lazy var snowmanImage: UIImageView = {
         let image = UIImageView()
@@ -51,12 +50,30 @@ class AnimationViewController: UIViewController {
     //Play Pause Button
     lazy var playPauseButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.text = "play"
         button.setImage(#imageLiteral(resourceName: "playButton"), for: .normal)
         button.layer.cornerRadius = 0.5 * button.bounds.size.width
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
         return button
     }()
+    
+    @objc func buttonAction(sender: UIButton) {
+        print("Button pushed")
+        switch currentAnimation {
+        case SettingsKeys.Width.rawValue :
+            animateWidth()
+        case SettingsKeys.Height.rawValue:
+            animateHeight()
+        case SettingsKeys.RotationX.rawValue:
+            animateRotationX()
+        case SettingsKeys.RotationY.rawValue:
+            animateRotationY()
+        case SettingsKeys.RotationZ.rawValue:
+            animateRotationZ()
+        default:
+            break
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +86,65 @@ class AnimationViewController: UIViewController {
         setUpPicker()
         self.picker.dataSource = self
         self.picker.delegate = self
+    }
+    
+    
+    
+    @IBAction func play(button: UIButton) {
+        print("Button clicked")
+        switch currentAnimation {
+        case SettingsKeys.Width.rawValue :
+            animateWidth()
+        case SettingsKeys.Height.rawValue:
+            animateHeight()
+        case SettingsKeys.RotationX.rawValue:
+            animateRotationX()
+        case SettingsKeys.RotationY.rawValue:
+            animateRotationY()
+        case SettingsKeys.RotationZ.rawValue:
+            animateRotationZ()
+        default:
+            break
+        }
+    }
+    
+    
+    
+    func animateWidth() {
+        
+    }
+    func animateHeight() {
+        
+    }
+    
+    func animateRotationX() {
+        let animation = CABasicAnimation(keyPath: "transform.rotation.x")
+        let angleRadian = 2.0 * .pi
+        animation.fromValue = 0
+        animation.byValue =  angleRadian
+        animation.duration = 5.0
+        animation.repeatCount = Float.infinity
+        snowmanImage.layer.add(animation, forKey: nil)
+    }
+    
+    func animateRotationY() {
+        let animation = CABasicAnimation(keyPath: "transform.rotation.y")
+        let angleRadian = 2.0 * .pi
+        animation.fromValue = 0
+        animation.byValue =  angleRadian
+        animation.duration = 5.0
+        animation.repeatCount = Float.infinity
+        snowmanImage.layer.add(animation, forKey: nil)
+    }
+    
+    func animateRotationZ() {
+        let animation = CABasicAnimation(keyPath: "transform.rotation.y")
+        let angleRadian = 2.0 * .pi
+        animation.fromValue = 0
+        animation.byValue =  angleRadian
+        animation.duration = 5.0
+        animation.repeatCount = Float.infinity
+        snowmanImage.layer.add(animation, forKey: nil)
     }
     
     
