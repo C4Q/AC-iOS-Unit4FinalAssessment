@@ -38,6 +38,7 @@ class SettingsViewController: UIViewController {
     }
     
     func layoutTableView() {
+        tableView.backgroundColor = .orange
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
