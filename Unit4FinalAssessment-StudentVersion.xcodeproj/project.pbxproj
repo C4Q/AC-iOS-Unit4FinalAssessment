@@ -12,6 +12,10 @@
 		54AE102E2007F203005FFA29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54AE102C2007F203005FFA29 /* LaunchScreen.storyboard */; };
 		54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10352007F256005FFA29 /* AnimationViewController.swift */; };
 		54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10372007F270005FFA29 /* SettingsViewController.swift */; };
+		81432ED32009119B008E3D92 /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81432ED22009119B008E3D92 /* AnimationView.swift */; };
+		81432ED720091C21008E3D92 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81432ED620091C21008E3D92 /* SettingsTableViewCell.swift */; };
+		81432ED9200925FE008E3D92 /* SavedSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81432ED8200925FE008E3D92 /* SavedSettings.swift */; };
+		819E3A5C20093F9B006969B5 /* PersistentStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E3A5B20093F9B006969B5 /* PersistentStoreManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		54AE102F2007F203005FFA29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54AE10352007F256005FFA29 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		54AE10372007F270005FFA29 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		81432ED22009119B008E3D92 /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		81432ED620091C21008E3D92 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		81432ED8200925FE008E3D92 /* SavedSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSettings.swift; sourceTree = "<group>"; };
+		819E3A5B20093F9B006969B5 /* PersistentStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStoreManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +62,13 @@
 		54AE10222007F203005FFA29 /* Unit4FinalAssessment-StudentVersion */ = {
 			isa = PBXGroup;
 			children = (
+				81432ED620091C21008E3D92 /* SettingsTableViewCell.swift */,
 				54AE10232007F203005FFA29 /* AppDelegate.swift */,
 				54AE10352007F256005FFA29 /* AnimationViewController.swift */,
+				81432ED22009119B008E3D92 /* AnimationView.swift */,
 				54AE10372007F270005FFA29 /* SettingsViewController.swift */,
+				819E3A5B20093F9B006969B5 /* PersistentStoreManager.swift */,
+				81432ED8200925FE008E3D92 /* SavedSettings.swift */,
 				54AE102A2007F203005FFA29 /* Assets.xcassets */,
 				54AE102C2007F203005FFA29 /* LaunchScreen.storyboard */,
 				54AE102F2007F203005FFA29 /* Info.plist */,
@@ -135,8 +147,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81432ED9200925FE008E3D92 /* SavedSettings.swift in Sources */,
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
+				81432ED32009119B008E3D92 /* AnimationView.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,
+				81432ED720091C21008E3D92 /* SettingsTableViewCell.swift in Sources */,
+				819E3A5C20093F9B006969B5 /* PersistentStoreManager.swift in Sources */,
 				54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
