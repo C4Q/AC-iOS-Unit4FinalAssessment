@@ -10,7 +10,12 @@ import UIKit
 
 enum PropertyName: String {
     case widthMultiplier = "Width Multiplier"
-    //TO DO: Add other PropertyName Cases
+    case heightMultiplier = "Height Multiplier"
+    case horizontalOffset = "Horizontal Offset"
+    case verticalOffset = "Vertical Offset"
+    case numberOfFlips = "Number of Flips"
+    case opacity = "Opacity"
+    case curvature = "Curvature"
 }
 
 struct AnimationProperty {
@@ -22,11 +27,25 @@ struct AnimationProperty {
 }
 
 class SettingsViewController: UIViewController {
-
+    
     //TO DO: Add more properties
     var properties: [[AnimationProperty]] =
-    [
-        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)]
+        [
+            // Scale
+            [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0),
+             AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)
+            ],
+            
+            // Offset
+            [AnimationProperty(name: .horizontalOffset, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0),
+             AnimationProperty(name: .verticalOffset, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)
+            ],
+            
+            // Other
+            [AnimationProperty(name: .numberOfFlips, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0),
+             AnimationProperty(name: .opacity, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0),
+             AnimationProperty(name: .curvature, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0)
+            ]
     ]
 
     
@@ -75,7 +94,8 @@ extension SettingsViewController: UITableViewDelegate {
         switch section {
         case 0:
             return "Size Settings"
-        //TO DO: Handle other sections
+        case 1:
+            return "Offset Settings"
         default:
             return "Other Settings"
         }
