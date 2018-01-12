@@ -43,6 +43,8 @@ class AnimationViewController: UIViewController {
     var xOffSet: CGFloat = 0
     var yOffSet: CGFloat = 0
     var numberOfRotations: Int = 1 // TODO: Set to 0 for data testing
+    var widthMultiplier: Double = 0.8
+    var heightMultiplier: Double = 0.8
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,20 +75,16 @@ class AnimationViewController: UIViewController {
                     //Eventually, there will need to be a switch of some kind that dynamically changes this block of code based on the pickerview selected row.
                     var selectedAnimationsToRun = self.sampleArr[self.currentPickerViewRow] //In theory, this should populate and then replace the number values in the animations
                     
-//                    var widthValue = 0
-//                    var heightValue = 0
-//                    var xOffSet = 0
-//                    var yOffSet = 0
-//                    var numberOfRotations = 1
+
                     
                     self.animationView.snowmanImageView.layer.opacity = 0.0
                     
                     //To change x and y position
-                    self.animationView.snowmanImageView.transform = CGAffineTransform(translationX: self.xOffSet, y: self.yOffSet)
+                    self.animationView.snowmanImageView.transform = CGAffineTransform(translationX: self.xOffSet, y: self.yOffSet).scaledBy(x: CGFloat(self.widthMultiplier), y: CGFloat(self.heightMultiplier))
                     
-                    //To change height
+                    //To change height multiplier
                     
-                    //To change width
+                    //To change width multiplier
                     
                     //To set number of rotations on X Axis
                     
