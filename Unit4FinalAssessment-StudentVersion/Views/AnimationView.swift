@@ -40,6 +40,9 @@ class AnimationView: UIView {
     lazy var controlButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = .red
+        button.setImage(#imageLiteral(resourceName: "circled_play"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "cancel"), for: .selected)
+        
         return button
     }()
     

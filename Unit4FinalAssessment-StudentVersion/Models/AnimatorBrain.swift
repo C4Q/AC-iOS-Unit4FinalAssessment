@@ -6,13 +6,18 @@
 //  Copyright © 2018 C4Q . All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class AnimatorBrain {
     
+    private init() {}
+    static let manager = AnimatorBrain()
     
+    var animations = [String : Animation]()
     
-    
+    func addAnimation(name: String, animation: Animation) {
+        animations[name] = animation
+    }
     
     
 }
