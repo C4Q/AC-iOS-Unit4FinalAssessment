@@ -9,14 +9,14 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
-    var properties: [AnimationProperty] =
+    
+    var properties: [[AnimationProperty]] =
     [
-        AnimationProperty(name: .widthMultiplier, stepperMin: 0.0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0, category: 0, categoryDescription: "Size Settings", animation: ""),
-         AnimationProperty(name: .heightMutiplier, stepperMin: 0.0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0, category: 0, categoryDescription: "Size Settings", animation: ""),
-        AnimationProperty(name: .horizontalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10, startingStepperVal: 0, category: 1, categoryDescription: "Position Settings", animation: ""),
-        AnimationProperty(name: .verticalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10, startingStepperVal: 0, category: 1, categoryDescription: "Position Settings", animation: ""),
-        AnimationProperty(name: .numberFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0, category: 2, categoryDescription: "Other Settings", animation: "")
+        [AnimationProperty(name: .widthMultiplier, stepperMin: 0.0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0, animation: ""),
+         AnimationProperty(name: .heightMutiplier, stepperMin: 0.0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0, animation: "")],
+        [AnimationProperty(name: .horizontalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10, startingStepperVal: 0, animation: ""),
+        AnimationProperty(name: .verticalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10, startingStepperVal: 0, animation: "")],
+        [AnimationProperty(name: .numberFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0, animation: "")]
     ]
     
     override func viewDidLoad() {
@@ -44,12 +44,9 @@ class SettingsViewController: UIViewController {
     }()
 }
 
-//protocol ButtonPressedDelegate: class {
-//    func buttonPressed(animation: String)
-//}
-
 // MARK:- Functions
 extension SettingsViewController {
+    
     @objc func saveAnimation() {
         let alert = UIAlertController(title: "Add Setting", message: "Enter a name for your setting", preferredStyle: .alert)
         alert.addTextField { (textField) in
@@ -60,8 +57,7 @@ extension SettingsViewController {
             if let textField = alert?.textFields {
                 if let settingName = textField[0].text {
                     print("Text field: \(settingName)")
-//                    var delegate: ButtonPressedDelegate!
-//                    delegate.buttonPressed(settingName)
+                    print(self.properties)
                 }
             }
         }))

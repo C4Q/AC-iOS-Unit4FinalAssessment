@@ -13,8 +13,6 @@ class AnimationViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.6, green: 0.6, blue: 0.9, alpha: 1.0)
         setupViews()
-        let animation = FileManagerHelper.manager.getAllAnimations()
-        animation.forEach{print($0)}
     }
     
     var pressed = false

@@ -8,14 +8,14 @@
 
 import UIKit
 
+protocol PropertyTVCellDelegate: class {
+    func stepperValueChanged(_ sender: UITableViewCell, property: AnimationProperty)
+}
 
-class PropertyTVCell: UITableViewCell, ButtonPressedDelegate {
-    func buttonPressed(animation: String) {
-        property.animation = animation
-        FileManagerHelper.manager.addNew(newFavoriteImage: property)
-    }
+class PropertyTVCell: UITableViewCell {
     
-
+    var delegate: PropertyTVCellDelegate?
+    
     var property: AnimationProperty! {
         didSet {
             self.animationPropertyLabel.text = property.name.rawValue + ": " + "\(property.startingStepperVal)"
@@ -24,11 +24,8 @@ class PropertyTVCell: UITableViewCell, ButtonPressedDelegate {
             self.stepper.stepValue = property.stepperIncrement
             self.stepper.value = property.startingStepperVal
             setNeedsLayout()
-            //PropertyTVCell.propertyToSend.append(property)
         }
     }
-    
-    //static var propertyToSend = [AnimationProperty]()
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -47,7 +44,6 @@ class PropertyTVCell: UITableViewCell, ButtonPressedDelegate {
     
     lazy var stepper: UIStepper = {
         let stepper = UIStepper()
-        //stepper.delegate = self
         stepper.addTarget(self, action: #selector(stepperValueChanged), for: UIControlEvents.valueChanged)
         return stepper
     }()
@@ -57,11 +53,8 @@ class PropertyTVCell: UITableViewCell, ButtonPressedDelegate {
         let newPosition = Int(Int(property.startingStepperVal * 100) - Int(stepper.value * 100))
         let val = (startPosition - newPosition)
         property.startingStepperVal = Double(val) / 100
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
         
+        delegate?.stepperValueChanged(self, property: self.property)
     }
 
     private func commonInit() {
@@ -87,5 +80,5 @@ class PropertyTVCell: UITableViewCell, ButtonPressedDelegate {
         stepper.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         stepper.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true
     }
-
 }
+

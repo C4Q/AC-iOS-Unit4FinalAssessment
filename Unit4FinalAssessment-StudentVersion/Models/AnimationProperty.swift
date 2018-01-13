@@ -22,8 +22,6 @@ struct AnimationProperty: Codable {
     let stepperMax: Double
     let stepperIncrement: Double
     var startingStepperVal: Double
-    let category: Int
-    let categoryDescription: String
     var animation: String
     
     enum PropertyName: String, Codable {
