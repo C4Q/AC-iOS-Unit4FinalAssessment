@@ -16,6 +16,8 @@ import UIKit
 //    case numberFlips = "Number of Flips"
 //}
 
+
+
 struct AnimationProperty: Codable {
     let name: PropertyName
     let stepperMin: Double

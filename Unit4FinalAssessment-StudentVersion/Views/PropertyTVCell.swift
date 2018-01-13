@@ -53,7 +53,6 @@ class PropertyTVCell: UITableViewCell {
         let newPosition = Int(Int(property.startingStepperVal * 100) - Int(stepper.value * 100))
         let val = (startPosition - newPosition)
         property.startingStepperVal = Double(val) / 100
-        
         delegate?.stepperValueChanged(self, property: self.property)
     }
 

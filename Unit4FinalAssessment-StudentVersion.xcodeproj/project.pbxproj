@@ -17,7 +17,6 @@
 		81567C3C20093ABC00957B1C /* SettingsViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81567C3B20093ABC00957B1C /* SettingsViewController+Extension.swift */; };
 		81567C3F2009578700957B1C /* FileManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81567C3E2009578700957B1C /* FileManagerHelper.swift */; };
 		81567C4120095A6400957B1C /* AnimationViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81567C4020095A6400957B1C /* AnimationViewController+Extension.swift */; };
-		81567C43200969AE00957B1C /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81567C42200969AE00957B1C /* UserDefaultsHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		81567C3B20093ABC00957B1C /* SettingsViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsViewController+Extension.swift"; sourceTree = "<group>"; };
 		81567C3E2009578700957B1C /* FileManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerHelper.swift; sourceTree = "<group>"; };
 		81567C4020095A6400957B1C /* AnimationViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationViewController+Extension.swift"; sourceTree = "<group>"; };
-		81567C42200969AE00957B1C /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +107,6 @@
 			children = (
 				81567C39200933B900957B1C /* AnimationProperty.swift */,
 				81567C3E2009578700957B1C /* FileManagerHelper.swift */,
-				81567C42200969AE00957B1C /* UserDefaultsHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -185,7 +182,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81567C43200969AE00957B1C /* UserDefaultsHelper.swift in Sources */,
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
 				81567C4120095A6400957B1C /* AnimationViewController+Extension.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,

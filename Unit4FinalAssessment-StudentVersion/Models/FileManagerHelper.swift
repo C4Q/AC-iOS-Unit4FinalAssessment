@@ -13,29 +13,16 @@ class FileManagerHelper {
     static let manager = FileManagerHelper()
     
     
-    private var animationSaved = [AnimationProperty]() {
+    private var animationSaved = [[AnimationProperty]]() {
         didSet {
-            removeDupes()
             saveAnimation()
         }
     }
     
-    func removeDupes() {
-        var animationSet = Set<String>()
-        var noDupeArr = [AnimationProperty]()
-        for animation in animationSaved {
-            let (inserted, _) = animationSet.insert(animation.animation)
-            if inserted {
-                noDupeArr.append(animation)
-            }
-        }
-        if animationSaved.count != noDupeArr.count { animationSaved = noDupeArr }
-    }
-    
-    func addNew(newFavoriteImage: AnimationProperty) {
+    func addNew(newFavoriteImage: [AnimationProperty]) {
         animationSaved.append(newFavoriteImage)
     }
-    func getAllAnimations() -> [AnimationProperty] {
+    func getAllAnimations() -> [[AnimationProperty]] {
         return animationSaved
     }
     
@@ -56,7 +43,7 @@ class FileManagerHelper {
         do {
             let animationURL = dataFilePath(withPathName: animationPath)
             let encodedData = try Data(contentsOf: animationURL)
-            let savedAnimations = try propertyListDecoder.decode([AnimationProperty].self, from: encodedData)
+            let savedAnimations = try propertyListDecoder.decode([[AnimationProperty]].self, from: encodedData)
             animationSaved = savedAnimations
         }
         catch {
@@ -72,6 +59,7 @@ class FileManagerHelper {
     //THIS IS ONLY FOR THE ABOVE METHOD
     private func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        print(paths[0])
         return paths[0]
     }
 }
