@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navCon = UINavigationController(rootViewController: svc)
         svc.tabBarItem = UITabBarItem(title: "Settings", image: nil, tag: 1)
         tbc.viewControllers = [avc, navCon]
+        UITabBar.appearance().backgroundColor = UIColor.init(displayP3Red: 0/255, green: 191/255, blue: 255/255, alpha: 1.0)
+        UITabBar.appearance().tintColor = UIColor(red: 46/255, green: 184/255, blue: 230/255, alpha: 1.0)
+        UINavigationBar.appearance().backgroundColor = UIColor.init(displayP3Red: 0/255, green: 191/255, blue: 255/255, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor(red: 46/255, green: 184/255, blue: 230/255, alpha: 1.0)
         window?.rootViewController = tbc
         window?.makeKeyAndVisible()
         return true
