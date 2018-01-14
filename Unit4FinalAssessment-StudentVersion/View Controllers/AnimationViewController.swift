@@ -9,16 +9,41 @@
 import UIKit
 
 class AnimationViewController: UIViewController {
+    
+    var properties = [[AnimationProperty]]() {
+        didSet {
+            self.pickerView.reloadAllComponents()
+        }
+    }
+    
+    var property = [AnimationProperty]() {
+        didSet {
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(red: 0.6, green: 0.6, blue: 0.9, alpha: 1.0)
         setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        populatePickerView()
+    }
+    
+    private func populatePickerView() {
+        properties = FileManagerHelper.manager.getAllAnimations()
+    }
+    
     var pressed = false
     var highPosition = NSLayoutConstraint()
     var widthPosition = NSLayoutConstraint()
-    
+    var centerX = NSLayoutConstraint()
+    var centerY = NSLayoutConstraint()
+    var propertyAnimator = UIViewPropertyAnimator(duration: 5.0, curve: UIViewAnimationCurve.easeInOut, animations: nil)
+    var animation: CABasicAnimation!
     
     lazy var animatedImageView: UIImageView = {
         let imageView = UIImageView()
@@ -28,7 +53,8 @@ class AnimationViewController: UIViewController {
     
     lazy var pickerView: UIPickerView = {
         let pickView = UIPickerView()
-        
+        pickView.delegate = self
+        pickView.dataSource = self
         return pickView
     }()
     
@@ -67,13 +93,15 @@ class AnimationViewController: UIViewController {
     }
     
     private func constraints() {
-        animatedImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
+        centerY = animatedImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
+        centerY.isActive = true
         widthPosition = animatedImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         widthPosition.isActive = true
-        animatedImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        centerX = animatedImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        centerX.isActive = true
         highPosition = animatedImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45)
         highPosition.isActive = true
-        pickerView.topAnchor.constraint(equalTo: animatedImageView.bottomAnchor, constant: 16).isActive = true
+        pickerView.bottomAnchor.constraint(equalTo: startStopButton.topAnchor, constant: -16).isActive = true
         pickerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         pickerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         pickerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.33).isActive = true
@@ -85,12 +113,34 @@ class AnimationViewController: UIViewController {
 extension AnimationViewController {
     @objc func buttonAction(sender: UIButton)
     {
+        
         if pressed {
             self.startStopButton.setImage(#imageLiteral(resourceName: "play"), for: UIControlState.normal)
+            propertyAnimator.pauseAnimation()
             pressed = !pressed
         } else {
+            let indexPath = pickerView.selectedRow(inComponent: 0)
+            self.property = properties[indexPath]
             self.startStopButton.setImage(#imageLiteral(resourceName: "Stop"), for: UIControlState.normal)
+            self.animatedImageView.layer.removeAllAnimations()
+            applyingAnimations()
             pressed = !pressed
         }
+    }
+}
+
+extension AnimationViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return properties[row][0].animation
+    }
+}
+
+extension AnimationViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return properties.count
     }
 }

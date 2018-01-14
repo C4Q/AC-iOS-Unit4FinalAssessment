@@ -11,72 +11,41 @@ import UIKit
 //MARK:- Animation Functions
 extension AnimationViewController {
     
-    func animateRotationX() {
-        let animation = CABasicAnimation(keyPath: "transform.rotation.x")
-        let angleRadian: CGFloat =  .pi * 2 //360
-        //let rotation = CATransform3DMakeRotation(angleRadian, 1.0, 0.0, 0.0)
-        //imageView.layer.transform = CATransform3D
-        animation.fromValue = 0.0 //degrees
-        animation.byValue = angleRadian
-        animation.duration = 5.0 // seconds
-        animation.repeatCount = .infinity
-        animatedImageView.layer.add(animation, forKey: nil)
+    
+    func applyingAnimations() {
+        highPosition.isActive = false
+        widthPosition.isActive = false
+        highPosition = animatedImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: CGFloat(property[1].startingStepperVal))
+        widthPosition = animatedImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: CGFloat(property[0].startingStepperVal))
+        self.centerX.constant = CGFloat(property[2].startingStepperVal)
+        self.centerY.constant = CGFloat(property[3].startingStepperVal)
+        propertyAnimator.addAnimations {
+            self.view.layoutIfNeeded()
+            self.flips()
+            let angleRadian: CGFloat =  .pi * 2 //360
+            self.animation.fromValue = 0.0 //degrees
+            self.animation.byValue = angleRadian
+            self.animation.duration = 3.0
+            self.animation.repeatCount = .infinity
+            self.animatedImageView.layer.add(self.animation, forKey: nil)
+        }
+        highPosition.isActive = true
+        widthPosition.isActive = true
+        propertyAnimator.startAnimation()
     }
     
-    func animateRotationY() {
-        let animation = CABasicAnimation(keyPath: "transform.rotation.y")
-        let angleRadian: CGFloat =  .pi * 2 //360
-        //let rotation = CATransform3DMakeRotation(angleRadian, 1.0, 0.0, 0.0)
-        //imageView.layer.transform = CATransform3D
-        animation.fromValue = 0.0 //degrees
-        animation.byValue = angleRadian
-        animation.duration = 5.0 // seconds
-        animation.repeatCount = .infinity
-        animatedImageView.layer.add(animation, forKey: nil)
-    }
-    
-    func animateRotationZ() {
-        let animation = CABasicAnimation(keyPath: "transform.rotation.z")
-        let angleRadian: CGFloat =  .pi * 2 //360
-        //let rotation = CATransform3DMakeRotation(angleRadian, 1.0, 0.0, 0.0)
-        //imageView.layer.transform = CATransform3D
-        animation.fromValue = 0.0 //degrees
-        animation.byValue = angleRadian
-        animation.duration = 5.0 // seconds
-        animation.repeatCount = .infinity
-        animatedImageView.layer.add(animation, forKey: nil)
-    }
-    
-    
-    
-    func animateCornerRadius() {
-        let animation = CABasicAnimation(keyPath: "cornerRadius")
-        animation.fromValue = 0
-        animation.toValue = 20
-        animation.duration = 1.0
-        animatedImageView.layer.add(animation, forKey: nil)
-        animatedImageView.layer.cornerRadius = 20
-    }
-    
-    func animateScale(){
-        let animation = CABasicAnimation(keyPath: "transform.scale")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        let toValue = CATransform3DMakeScale(0.5, 0.5, 0)
-        let fromValue = CATransform3DMakeScale(1, 1, 0)
-        animation.fromValue = fromValue
-        animation.toValue = toValue
-        animation.duration = 2.0
-        animation.repeatCount = 1
-        animatedImageView.layer.add(animation, forKey: nil)
-        //imageView.layer.transform = CATransform3DMakeScale(0.5, 0.5, 0)
-    }
-    
-    func animateTranslation() {
-        let toValue = CATransform3DMakeTranslation(-20,-20,0)
-        let animation = CABasicAnimation(keyPath: "transform.translation")
-        animation.toValue = toValue
-        animation.duration = 1.0
-        animatedImageView.layer.add(animation, forKey: nil)
+    private func flips() {
+        let flip = property[4].startingStepperVal
+        switch flip {
+        case 1:
+            self.animation = CABasicAnimation(keyPath: "transform.rotation.x")
+        case 2:
+            self.animation = CABasicAnimation(keyPath: "transform.rotation.y")
+        case 3:
+            self.animation = CABasicAnimation(keyPath: "transform.rotation.z")
+        default:
+            self.animatedImageView.layer.removeAllAnimations()
+        }
     }
     
     

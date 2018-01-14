@@ -7,6 +7,8 @@
 //
 
 import UIKit
+
+// MARK:- Table View Delegates
 extension SettingsViewController: UITableViewDataSource, PropertyTVCellDelegate {
     func stepperValueChanged(_ sender: UITableViewCell, property: AnimationProperty) {
         guard let indexPath = tableView.indexPath(for: sender) else {return }

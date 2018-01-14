@@ -8,16 +8,6 @@
 
 import UIKit
 
-//enum PropertyName: String {
-//    case widthMultiplier = "Width Multiplier"
-//    case heightMutiplier = "Height Mutiplier"
-//    case horizontalOffset = "Horizontal Offset"
-//    case verticalOffset = "Vertical Offset"
-//    case numberFlips = "Number of Flips"
-//}
-
-
-
 struct AnimationProperty: Codable {
     let name: PropertyName
     let stepperMin: Double

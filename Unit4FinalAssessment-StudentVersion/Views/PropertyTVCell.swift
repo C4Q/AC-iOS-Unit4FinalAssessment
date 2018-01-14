@@ -8,10 +8,13 @@
 
 import UIKit
 
+// MARK:- Protocol
 protocol PropertyTVCellDelegate: class {
     func stepperValueChanged(_ sender: UITableViewCell, property: AnimationProperty)
 }
 
+
+// MARK:- Custom TableViewCell
 class PropertyTVCell: UITableViewCell {
     
     var delegate: PropertyTVCellDelegate?

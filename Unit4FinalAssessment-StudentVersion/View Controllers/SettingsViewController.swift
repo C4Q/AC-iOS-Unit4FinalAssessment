@@ -16,7 +16,7 @@ class SettingsViewController: UIViewController {
          AnimationProperty(name: .heightMutiplier, stepperMin: 0.0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0, animation: "")],
         [AnimationProperty(name: .horizontalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10, startingStepperVal: 0, animation: ""),
         AnimationProperty(name: .verticalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10, startingStepperVal: 0, animation: "")],
-        [AnimationProperty(name: .numberFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0, animation: "")]
+        [AnimationProperty(name: .numberFlips, stepperMin: 0, stepperMax: 3.0, stepperIncrement: 1.0, startingStepperVal: 0.0, animation: "")]
     ]
     
     override func viewDidLoad() {
@@ -56,7 +56,6 @@ extension SettingsViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             if let textField = alert?.textFields {
                 if let settingName = textField[0].text {
-                    //print("Text field: \(settingName)")
                     self.toSaveProperty(self.properties, settingName)
                 }
             }
