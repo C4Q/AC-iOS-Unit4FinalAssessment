@@ -113,16 +113,22 @@ class AnimationViewController: UIViewController {
 extension AnimationViewController {
     @objc func buttonAction(sender: UIButton)
     {
-        
         if pressed {
             self.startStopButton.setImage(#imageLiteral(resourceName: "play"), for: UIControlState.normal)
-            propertyAnimator.pauseAnimation()
+            if propertyAnimator.isRunning {
+                self.propertyAnimator.pauseAnimation()
+                //self.animatedImageView.layer.removeAllAnimations()
+            } else {
+                self.animatedImageView.layer.removeAllAnimations()
+            }
             pressed = !pressed
         } else {
             let indexPath = pickerView.selectedRow(inComponent: 0)
             self.property = properties[indexPath]
             self.startStopButton.setImage(#imageLiteral(resourceName: "Stop"), for: UIControlState.normal)
-            self.animatedImageView.layer.removeAllAnimations()
+            if !propertyAnimator.isRunning {
+                propertyAnimator.stopAnimation(true)
+            }
             applyingAnimations()
             pressed = !pressed
         }
