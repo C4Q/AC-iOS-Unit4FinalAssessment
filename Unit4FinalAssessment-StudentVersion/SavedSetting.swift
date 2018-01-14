@@ -9,5 +9,11 @@
 import Foundation
 
 struct SavedSetting: Codable {
-    let savedSettingArray: [Double]
+    //let savedSettingArray: [Double]
+    var savedSettingName: String
+    var width : Double
+    var height: Double
+    var horizontal: Double
+    var vertical : Double
+    var numberOfFlips : Double
 }

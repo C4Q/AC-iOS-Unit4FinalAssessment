@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tbc.viewControllers = [avc, navCon]
         window?.rootViewController = tbc
         window?.makeKeyAndVisible()
+        PersistentStoreManager.manager.load()
         return true
     }
 

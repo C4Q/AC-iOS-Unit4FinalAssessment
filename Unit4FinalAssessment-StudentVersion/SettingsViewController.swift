@@ -30,16 +30,16 @@ class SettingsViewController: UIViewController {
     //TODO: init to send data?
     //TO DO: Add more properties
     var properties: [[AnimationProperty]] =
-    [
-        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0),
-         AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax:
-            1.0, stepperIncrement: 0.1, startingStepperVal: 0.0
-            ),
-         AnimationProperty(name: .horizontalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10.0, startingStepperVal: 0.0),
-         AnimationProperty(name: .verticalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10.0, startingStepperVal: 0.0),
-        AnimationProperty(name: .numberOfFlips, stepperMin: 0, stepperMax: 10, stepperIncrement: 1.0, startingStepperVal: 0.0)]
+        [
+            [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 1.0, stepperIncrement: 0.1, startingStepperVal: 0.0),
+             AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax:
+                1.0, stepperIncrement: 0.1, startingStepperVal: 0.0
+                ),
+             AnimationProperty(name: .horizontalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10.0, startingStepperVal: 0.0),
+             AnimationProperty(name: .verticalOffset, stepperMin: -100, stepperMax: 100, stepperIncrement: 10.0, startingStepperVal: 0.0),
+             AnimationProperty(name: .numberOfFlips, stepperMin: 0, stepperMax: 10, stepperIncrement: 1.0, startingStepperVal: 0.0)]
     ]
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,20 +47,21 @@ class SettingsViewController: UIViewController {
         navigationItem.title = "Settings"
         layoutTableView()
         configureNavBar()
-    
-}
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
     
+    var savedSettingValues = SavedSetting(savedSettingName: "", width: 0.0, height: 0.0, horizontal: 0.0, vertical: 0.0, numberOfFlips: 0.0)
     
-    var savedSettingValues = [Double]()
-    var cell0 = 0.0
-    var cell1 = 0.0
-    var cell2 = 0.0
-    var cell3 = 0.0
-    var cell4 = 0.0
+//    var savedSettingName = ""
+//    var cell0 = 0.0
+//    var cell1 = 0.0
+//    var cell2 = 0.0
+//    var cell3 = 0.0
+//    var cell4 = 0.0
     
     func layoutTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,22 +92,34 @@ class SettingsViewController: UIViewController {
     }
     
     @objc func saveSettings() {
-        savedSettingValues.append(cell0)
-        savedSettingValues.append(cell1)
-        savedSettingValues.append(cell2)
-        savedSettingValues.append(cell3)
-        savedSettingValues.append(cell4)
+//        savedSettingValues.append(cell0)
+//        savedSettingValues.append(cell1)
+//        savedSettingValues.append(cell2)
+//        savedSettingValues.append(cell3)
+//        savedSettingValues.append(cell4)
         
-        //saved stepper values
-        print(savedSettingValues)
-        let alert = UIAlertController(title: "Saved to Settings", message: "Saved to Setting", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        alert.addAction(ok)
+        let alert = UIAlertController(title: "Set setting title", message: "Set setting title here", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Setting Title Input", style: .default, handler: {(saveSettingTitle) in
+            self.savedSettingValues.savedSettingName = (alert.textFields?.first?.text)!
+            print(self.savedSettingValues.savedSettingName)
+            let newSetting = self.savedSettingValues
+            PersistentStoreManager.manager.addSavedSettingToList(savedSetting: newSetting)
+            
+            //saved stepper values
+            print(self.savedSettingValues)
+            
+            
+        })
+        alert.addAction(action)
+        //print(text)
+        
+        alert.addTextField(configurationHandler: {(textField : UITextField!) -> Void in
+            //let settingTextField = textField
+            textField.placeholder = "Input a title for your setting"
+            
+        })
         present(alert, animated: true, completion: nil)
     }
-    
-    
-    
 }
 
 extension SettingsViewController: UITableViewDataSource {
@@ -127,16 +140,15 @@ extension SettingsViewController: UITableViewDataSource {
         //setting picker values for saving later on
         switch cell.tag {
         case 0:
-            cell0 = cell.stepper.value
-            print(cell0, "test1")
+            savedSettingValues.width = cell.stepper.value
         case 1:
-            cell1 = cell.stepper.value
+            savedSettingValues.height = cell.stepper.value
         case 2:
-            cell2 = cell.stepper.value
+            savedSettingValues.horizontal = cell.stepper.value
         case 3:
-            cell3 = cell.stepper.value
+            savedSettingValues.vertical = cell.stepper.value
         case 4:
-            cell4 = cell.stepper.value
+            savedSettingValues.numberOfFlips = cell.stepper.value
         default:
             print("other cell")
         }

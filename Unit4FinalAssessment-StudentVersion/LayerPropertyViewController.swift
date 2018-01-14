@@ -10,6 +10,7 @@ import UIKit
 
 class LayerPropertyViewController: UIViewController {
    
+    var selectedSetting: SavedSetting!
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -18,7 +19,7 @@ class LayerPropertyViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     
     var buttonState = true
-    var pickerViewList = ["Default", "Big Center Flip", "Skinny Right 2 Flips"]
+    var pickerViewList = [[SavedSetting(savedSettingName: "Default", width: 0.0, height: 0.0, horizontal: 0.0, vertical: 0.0, numberOfFlips: 0.0)]]
     var arrayOfStepperValues: [Double]!
     var settingName: String!
     override func viewDidLoad() {
@@ -27,22 +28,10 @@ class LayerPropertyViewController: UIViewController {
         pickerView.delegate = self
         pickerView.dataSource = self
     }
-    //Thread 1: Fatal error: init(coder:) is not supported
-//    init(arrayOfStepperValues: [Double], settingName: String) {
-//        super.init(nibName: nil, bundle: nil)
-//        self.arrayOfStepperValues = arrayOfStepperValues
-//        self.settingName = settingName
-//    }
-//
-//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-//        super.init(nibName: nibNameOrNil, bundle: nil)
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        fatalError("init(coder:) is not supported")
-//    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        pickerView.reloadAllComponents()
+    }
 
     static func storyBoardInstance() -> LayerPropertyViewController {
         //static don't need to instantiate class to get access to it
@@ -102,25 +91,25 @@ extension LayerPropertyViewController: UIPickerViewDataSource,UIPickerViewDelega
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.pickerViewList.count
+        return PersistentStoreManager.manager.getSettings().count + 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerViewList[row]
+        if row == 0 {
+            return pickerViewList[row].first?.savedSettingName
+        } else {
+            return PersistentStoreManager.manager.getSettings()[row - 1].savedSettingName
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if (row == 1) {
-            buttonPressed(button)
-            bigCenterFlip()
-        } else if (row == 2){
-            buttonPressed(button)
-            skinnyRight2Flips()
+        if row == 0 {
+            selectedSetting = pickerViewList[row].first
+        } else {
+            selectedSetting = PersistentStoreManager.manager.getSettings()[row - 1]
+            
         }
         
-        else{
-            print("animation not coded yet")
-        }
     }
 }
 
@@ -134,11 +123,11 @@ extension LayerPropertyViewController {
         animation.byValue = angleRadian
         animation.duration = 2.0 //
         animation.repeatCount = Float.infinity
+        
         imageView.layer.add(animation, forKey: nil)
     }
     
     func skinnyRight2Flips() {
-//        let toTopLeft = CATransform3DMakeTranslation(-view.layer.position.x, -view.layer.position.y, 0)     // top left
         let flips = CATransform3DMakeRotation(360, 1, 0, 0)
 
         let toTopRight = CATransform3DMakeTranslation(view.layer.position.x, -view.layer.position.y,0)     // top right

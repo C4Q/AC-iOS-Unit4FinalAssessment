@@ -23,20 +23,20 @@ class PersistentStoreManager {
     }
     
     // returns documents directory path for app sandbox
-    func documentsDirectory() -> URL {
+    private func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
     
     // /documents/SavedSetting.plist
     // returns the path for supplied name from the dcouments directory
-    func dataFilePath(withPathName path: String) -> URL {
+    private func dataFilePath(withPathName path: String) -> URL {
         return PersistentStoreManager.manager.documentsDirectory().appendingPathComponent(path)
     }
     
     // save to documents directory
     // write to path: /Documents/
-    func saveToDisk() {
+    private func saveToDisk() {
         let encoder = PropertyListEncoder()
         do {
             let data = try encoder.encode(savedSettings)
@@ -51,7 +51,7 @@ class PersistentStoreManager {
     }
     
     // load from documents directory
-    func load() {
+    public func load() {
         // what's the path we are reading from?
         let path = dataFilePath(withPathName: PersistentStoreManager.kPathname)
         let decoder = PropertyListDecoder()
@@ -63,40 +63,20 @@ class PersistentStoreManager {
         }
     }
     
-    // does 2 tasks:
-    // 1. stores image in documents folder
-    // 2. appends favorite item to array
-//    func addToFavorites(pixabay: Hits, cityName: String, andImage image: UIImage) -> Bool {
-//        // checking for uniqueness
-//        let indexExist = self.favorites.index{ $0.webformatURL == pixabay.webformatURL}
-//        if indexExist != nil { print("FAVORITE EXIST"); return false }
-//        
-//        // 1) save image from favorite photo
-//        let success = storeImageToDisk(image: image, andFavorites: pixabay)
-//        if !success { return false }
-//        
-//        // 2) save favorite object
-//        let newFavorite = Favorite.init(webformatURL: pixabay.webformatURL, cityName: cityName, id: pixabay.id)
-//        self.favorites.append(newFavorite)
-//        return true
-//    }
-//    
-//    // store image
-//    func storeImageToDisk(image: UIImage, andFavorites imgURL: Hits) -> Bool {
-//        // packing data from image
-//        guard let imageData = UIImagePNGRepresentation(image) else { return false }
-//        
-//        // writing and saving to documents folder
-//        
-//        // 1) save image from favorite photo
-//        let imageURL = PersistentStoreManager.manager.dataFilePath(withPathName: "\(imgURL.id)")
-//        do {
-//            try imageData.write(to: imageURL)
-//        } catch {
-//            print("image saving error: \(error.localizedDescription)")
-//        }
-//        return true
-//    }
-//    
+    public func addSavedSettingToList(savedSetting setting: SavedSetting) {
+        
+        savedSettings.append(setting)
+        }
+    
+    // read
+    
+    public func getSettings() -> [SavedSetting] {
+        
+        return savedSettings
+        
+    }
+    
+    
+   
 }
 
