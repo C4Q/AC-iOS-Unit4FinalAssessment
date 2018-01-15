@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         let tbc = UITabBarController()
-        let avc = AnimationViewController()
+        let avc = LayerPropertyViewController.storyBoardInstance()
         avc.tabBarItem = UITabBarItem(title: "Animation", image: nil, tag: 0)
         let svc = SettingsViewController()
         let navCon = UINavigationController(rootViewController: svc)
@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tbc.viewControllers = [avc, navCon]
         window?.rootViewController = tbc
         window?.makeKeyAndVisible()
+        PersistentStoreManager.manager.load()
         return true
     }
 
