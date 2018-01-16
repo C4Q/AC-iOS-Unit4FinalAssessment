@@ -30,11 +30,11 @@ struct AnimationProperty {
 class SettingsViewController: UIViewController {
 
     var properties: [[AnimationProperty]] =
-    [
-        [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 2.0, stepperIncrement: 0.1, startingStepperVal: 0.0), AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax: 2.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
-        [AnimationProperty(name: .horizontalOffset, stepperMin: -300.0, stepperMax: 300.0, stepperIncrement: 10.0, startingStepperVal: 0.0), AnimationProperty(name: .verticalOffset, stepperMin: -300.0, stepperMax: 300.0, stepperIncrement: 10.0, startingStepperVal: 0.0)],
-        [AnimationProperty(name: .numberOfXFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0), AnimationProperty(name: .numberOfYFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0), AnimationProperty(name: .numberOfZFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0)], [AnimationProperty(name: .borderSize, stepperMin: 0, stepperMax: 20.0, stepperIncrement: 1.0, startingStepperVal: 0.0)]
-    ]
+        [
+            [AnimationProperty(name: .widthMultiplier, stepperMin: 0, stepperMax: 2.0, stepperIncrement: 0.1, startingStepperVal: 0.0), AnimationProperty(name: .heightMultiplier, stepperMin: 0, stepperMax: 2.0, stepperIncrement: 0.1, startingStepperVal: 0.0)],
+            [AnimationProperty(name: .horizontalOffset, stepperMin: -200.0, stepperMax: 200.0, stepperIncrement: 10.0, startingStepperVal: 0.0), AnimationProperty(name: .verticalOffset, stepperMin: -200.0, stepperMax: 200.0, stepperIncrement: 10.0, startingStepperVal: 0.0)],
+            [AnimationProperty(name: .numberOfXFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0), AnimationProperty(name: .numberOfYFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0), AnimationProperty(name: .numberOfZFlips, stepperMin: 0, stepperMax: 10.0, stepperIncrement: 1.0, startingStepperVal: 0.0)], [AnimationProperty(name: .borderSize, stepperMin: 0, stepperMax: 20.0, stepperIncrement: 1.0, startingStepperVal: 0.0)]
+        ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +68,6 @@ class SettingsViewController: UIViewController {
             
             var animations = [UserAnimation]()
             let cells = self.tableView.visibleCells as! Array<SettingsTableViewCell>
-            dump(cells.count)
             for cell in cells {
                 guard let cellIndexpath = self.tableView.indexPath(for: cell) else { return }
                 let section = cellIndexpath.section

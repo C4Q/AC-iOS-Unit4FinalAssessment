@@ -57,7 +57,24 @@ class AnimationView: UIView {
         return button
     }()
     
+    private func setupAnimationbutton() {
+        addSubview(animationbutton)
+        animationbutton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            animationbutton.topAnchor.constraint(equalTo: savedSettingsPickerView.bottomAnchor, constant: 8),
+            animationbutton.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.1),
+            animationbutton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            animationbutton.heightAnchor.constraint(equalTo: animationbutton.widthAnchor),
+            animationbutton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
+        ])
+    }
+    
     @objc private func animationButtonPressed() {
+        if FileManagerHelper.shared.getSavedAnimations().isEmpty {
+            showAlertController(with: "Error", message: "First you need to add new animation from settings page")
+            return
+        }
         if playingAnimation {
             playingAnimation = false
             pause(layer: snowmanImageView.layer)
@@ -91,12 +108,17 @@ class AnimationView: UIView {
         }
     }
     
+    private func showAlertController(with title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+    }
+    
     func widthAnimation(value: Double) {
         if value == 0.0 { return }
         let animation = CABasicAnimation(keyPath: "transform.scale.x")
         let toValue = CATransform3DMakeScale(CGFloat(value), 0, 0)
-        let fromValue = CATransform3DMakeScale(1, 1, 0)
-        animation.fromValue = fromValue
         animation.toValue = toValue
         animation.duration = 5.0
         animation.fillMode = kCAFillModeForwards
@@ -107,9 +129,7 @@ class AnimationView: UIView {
     func heightAnimation(value: Double) {
         if value == 0.0 { return }
         let animation = CABasicAnimation(keyPath: "transform.scale.y")
-        let toValue = CATransform3DMakeScale(0, CGFloat(value), 0)
-        let fromValue = CATransform3DMakeScale(1, 1, 0)
-        animation.fromValue = fromValue
+        let toValue = CATransform3DMakeScale(CGFloat(value), 0, 0)
         animation.toValue = toValue
         animation.duration = 5.0
         animation.fillMode = kCAFillModeForwards
@@ -143,9 +163,8 @@ class AnimationView: UIView {
         if value == 0.0 { return }
         let animation = CABasicAnimation(keyPath: "transform.rotation.x")
         let angleRadian = CGFloat.pi * 2.0
-        animation.fromValue = 0
         animation.byValue = angleRadian
-        animation.duration = 2
+        animation.duration = 3
         animation.repeatCount = Float(value)
         snowmanImageView.layer.add(animation, forKey: nil)
     }
@@ -154,9 +173,8 @@ class AnimationView: UIView {
         if value == 0.0 { return }
         let animation = CABasicAnimation(keyPath: "transform.rotation.y")
         let angleRadian = CGFloat.pi * 2.0
-        animation.fromValue = 0
         animation.byValue = angleRadian
-        animation.duration = 2
+        animation.duration = 3
         animation.repeatCount = Float(value)
         snowmanImageView.layer.add(animation, forKey: nil)
     }
@@ -165,9 +183,8 @@ class AnimationView: UIView {
         if value == 0.0 { return }
         let animation = CABasicAnimation(keyPath: "transform.rotation.z")
         let angleRadian = CGFloat.pi * 2.0
-        animation.fromValue = 0
         animation.byValue = angleRadian
-        animation.duration = 2
+        animation.duration = 3
         animation.repeatCount = Float(value)
         snowmanImageView.layer.add(animation, forKey: nil)
     }
@@ -195,19 +212,6 @@ class AnimationView: UIView {
         layer.beginTime = 0
         let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
         layer.beginTime = timeSincePause
-    }
-    
-    private func setupAnimationbutton() {
-        addSubview(animationbutton)
-        animationbutton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            animationbutton.topAnchor.constraint(equalTo: savedSettingsPickerView.bottomAnchor, constant: 8),
-            animationbutton.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.1),
-            animationbutton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            animationbutton.heightAnchor.constraint(equalTo: animationbutton.widthAnchor),
-            animationbutton.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor)
-        ])
     }
     
     override init(frame: CGRect) {

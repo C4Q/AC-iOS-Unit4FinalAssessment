@@ -27,7 +27,6 @@ class FileManagerHelper {
     
     private func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        print(paths[0])
         return paths[0]
     }
     
