@@ -12,6 +12,13 @@
 		54AE102E2007F203005FFA29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54AE102C2007F203005FFA29 /* LaunchScreen.storyboard */; };
 		54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10352007F256005FFA29 /* AnimationViewController.swift */; };
 		54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE10372007F270005FFA29 /* SettingsViewController.swift */; };
+		87B5F57B200D75530066547E /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B5F57A200D75530066547E /* AnimationView.swift */; };
+		87B5F57D200D85CC0066547E /* AnimationProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B5F57C200D85CC0066547E /* AnimationProperty.swift */; };
+		87B5F57F200D88C20066547E /* AnimationBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B5F57E200D88C20066547E /* AnimationBrain.swift */; };
+		F49C68F720090DC1008F85CC /* FileManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49C68F620090DC1008F85CC /* FileManagerHelper.swift */; };
+		F49C68FB20091FCE008F85CC /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49C68FA20091FCE008F85CC /* TableViewCell.swift */; };
+		F49C68FD2009236D008F85CC /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49C68FC2009236D008F85CC /* Settings.swift */; };
+		F49C690120094035008F85CC /* PropertyName.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49C690020094035008F85CC /* PropertyName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +29,13 @@
 		54AE102F2007F203005FFA29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54AE10352007F256005FFA29 /* AnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationViewController.swift; sourceTree = "<group>"; };
 		54AE10372007F270005FFA29 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		87B5F57A200D75530066547E /* AnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
+		87B5F57C200D85CC0066547E /* AnimationProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationProperty.swift; sourceTree = "<group>"; };
+		87B5F57E200D88C20066547E /* AnimationBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationBrain.swift; sourceTree = "<group>"; };
+		F49C68F620090DC1008F85CC /* FileManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerHelper.swift; sourceTree = "<group>"; };
+		F49C68FA20091FCE008F85CC /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		F49C68FC2009236D008F85CC /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		F49C690020094035008F85CC /* PropertyName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyName.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +69,52 @@
 			isa = PBXGroup;
 			children = (
 				54AE10232007F203005FFA29 /* AppDelegate.swift */,
-				54AE10352007F256005FFA29 /* AnimationViewController.swift */,
-				54AE10372007F270005FFA29 /* SettingsViewController.swift */,
+				F49C68F520090D91008F85CC /* Persistence Models */,
+				F49C68FE20092378008F85CC /* Models */,
+				F49C68F920091FB7008F85CC /* View */,
+				F49C68F820090DE5008F85CC /* ViewControllers */,
 				54AE102A2007F203005FFA29 /* Assets.xcassets */,
 				54AE102C2007F203005FFA29 /* LaunchScreen.storyboard */,
 				54AE102F2007F203005FFA29 /* Info.plist */,
 			);
 			path = "Unit4FinalAssessment-StudentVersion";
+			sourceTree = "<group>";
+		};
+		F49C68F520090D91008F85CC /* Persistence Models */ = {
+			isa = PBXGroup;
+			children = (
+				F49C68F620090DC1008F85CC /* FileManagerHelper.swift */,
+			);
+			path = "Persistence Models";
+			sourceTree = "<group>";
+		};
+		F49C68F820090DE5008F85CC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				54AE10352007F256005FFA29 /* AnimationViewController.swift */,
+				54AE10372007F270005FFA29 /* SettingsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F49C68F920091FB7008F85CC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F49C68FA20091FCE008F85CC /* TableViewCell.swift */,
+				87B5F57A200D75530066547E /* AnimationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F49C68FE20092378008F85CC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				87B5F57E200D88C20066547E /* AnimationBrain.swift */,
+				F49C68FC2009236D008F85CC /* Settings.swift */,
+				F49C690020094035008F85CC /* PropertyName.swift */,
+				87B5F57C200D85CC0066547E /* AnimationProperty.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,9 +188,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F49C68FD2009236D008F85CC /* Settings.swift in Sources */,
+				87B5F57B200D75530066547E /* AnimationView.swift in Sources */,
+				F49C68FB20091FCE008F85CC /* TableViewCell.swift in Sources */,
 				54AE10242007F203005FFA29 /* AppDelegate.swift in Sources */,
 				54AE10362007F256005FFA29 /* AnimationViewController.swift in Sources */,
+				F49C68F720090DC1008F85CC /* FileManagerHelper.swift in Sources */,
 				54AE10382007F270005FFA29 /* SettingsViewController.swift in Sources */,
+				87B5F57D200D85CC0066547E /* AnimationProperty.swift in Sources */,
+				F49C690120094035008F85CC /* PropertyName.swift in Sources */,
+				87B5F57F200D88C20066547E /* AnimationBrain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
